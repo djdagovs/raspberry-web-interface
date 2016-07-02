@@ -1,0 +1,28 @@
+{
+  "name": "raspberry-web-interface",
+  "authors": [
+    "Raymon de Looff <raydelooff@gmail.com>"
+  ],
+  "description": "A simple and responsive web interface for your Raspberry Pi, allowing you to view the status of your Pi and manage WiFi and other services.",
+  "main": "",
+  "keywords": [
+    "web",
+    "interface",
+    "control",
+    "raspberry",
+    "pi"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "^3.3.6",
+    "font-awesome": "^4.6.3"
+  }
+}

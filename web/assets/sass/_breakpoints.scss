@@ -1,0 +1,34 @@
+/* Custom, iPhone Retina */
+@mixin iphone-retina {
+	@media only screen and (min-width: 320px) {
+		@content;
+	}
+}
+
+/* Extra Small Devices, Phones */
+@mixin phone {
+	@media only screen and (min-width: #{$screen-xs}) {
+		@content;
+	}
+}
+
+/* Small Devices, Tablets */
+@mixin tablet {
+	@media only screen and (min-width: #{$screen-sm}) {
+		@content;
+	}
+}
+
+/* Medium Devices, Desktops */
+@mixin desktop {
+	@media only screen and (min-width: #{$screen-md}) {
+		@content;
+	}
+}
+
+/* Large Devices, Wide Screens */
+@mixin wide-screen {
+	@media only screen and (min-width: #{$screen-lg}) {
+		@content;
+	}
+}
