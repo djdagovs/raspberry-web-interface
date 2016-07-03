@@ -19,6 +19,7 @@ var scripts = {
     vendor: [
         'web/bower_components/jquery/dist/jquery.min.js',
         'web/bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
+        'web/bower_components/jasny-bootstrap/js/offcanvas.js'
     ],
 };
 

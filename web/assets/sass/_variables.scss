@@ -1,0 +1,42 @@
+// Import default and custom Bootstrap variables
+@import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/variables";
+@import "bootstrap-variables";
+
+// Colors
+$primary-color:          #c7053d;
+$primary-light-color:    lighten($primary-color, 5%);
+$primary-lighter-color:  lighten($primary-color, 10%);
+$primary-lightest-color: lighten($primary-color, 15%);
+$primary-dark-color:     darken($primary-color, 10%);
+$primary-darker-color:   darken($primary-color, 15%);
+
+$gray-color:          #2c363c;
+$gray-light-color:    #80868a;
+$gray-lighter-color:  lighten($gray-light-color, 10%);
+$gray-lightest-color: lighten($gray-light-color, 15%);
+$gray-dark-color:     darken($gray-color, 1%);
+$gray-darker-color:   darken($gray-color, 5%);
+
+$content-bg:			#ebf1f5;
+$content-border-color:	darken($content-bg, 10%);
+
+// Jasny Bootstrap
+// Navmenu
+
+$zindex-navmenu-fixed:              3000;
+
+// Basics of a navmenu
+$navmenu-width:                     250px;
+$navmenu-margin-vertical:           20px;
+$navmenu-default-color:             #FFF;
+$navmenu-default-bg:                $gray-color;
+$navmenu-default-border:            $gray-darker-color;
+
+// Navmenu links
+$navmenu-default-link-color:                #FFF;
+$navmenu-default-link-hover-color:          $gray-lighter-color;
+$navmenu-default-link-hover-bg:             transparent;
+$navmenu-default-link-active-color:         #FFF;
+$navmenu-default-link-active-bg:            $gray-dark-color;
+$navmenu-default-link-disabled-color:       $navbar-default-link-disabled-color;
+$navmenu-default-link-disabled-bg:          $navbar-default-link-disabled-bg;

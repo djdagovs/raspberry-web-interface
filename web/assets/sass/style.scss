@@ -1,9 +1,8 @@
-// Import Bootstrap variables
-@import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/variables";
-
 // Import variables and mixins
 @import "variables";
 @import "breakpoints";
 
 // Import application styles
 @import "base";
+@import "type";
+@import "navmenu";

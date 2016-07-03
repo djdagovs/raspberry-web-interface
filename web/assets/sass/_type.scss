@@ -1,0 +1,38 @@
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4 {
+	&:first-child {
+		margin-top: 0;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+h1, .h1 {
+	font-size: $font-size-h1 * 0.8;
+	font-weight: 300;
+
+	@include tablet {
+		font-size: $font-size-h1;
+	}
+}
+
+h2, .h2 {
+	font-size: $font-size-h2 * 0.8;
+	margin-bottom: 20px;
+
+	@include tablet {
+		font-size: $font-size-h2;
+	}
+}
+
+h3, .h3 {
+	font-size: $font-size-h3 * 0.8;
+
+	@include tablet {
+		font-size: $font-size-h3;
+	}
+}
