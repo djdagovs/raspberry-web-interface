@@ -37,7 +37,7 @@ class Executor
 			$this->logger->debug('The commands are not really executed, "pretend" is set to true.');
 		}
 
-		$command->execute();
+		$command->execute($this->pretend);
 
 		$this->logger->info('Executed command: '.$command->getCommand().'. Return status: '.$command->getReturnStatus());
 
