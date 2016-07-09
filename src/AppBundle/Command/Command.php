@@ -22,11 +22,6 @@ class Command
 	 */
 	private $returnStatus;
 
-	/**
-	 * @var boolean
-	 */
-	private $isValid;
-
 	public function __construct($command)
 	{
 		$this->setCommand($command);
@@ -65,7 +60,7 @@ class Command
 	 */
 	public function getOutput()
 	{
-		if($this->output == null) {
+		if (is_null($this->output)) {
 			throw new CommandNotExecutedException('Please execute the command first before retrieving the output.');
 		}
 
@@ -79,7 +74,7 @@ class Command
 	 */
 	public function getReturnStatus()
 	{
-		if($this->returnStatus == null) {
+		if (is_null($this->returnStatus)) {
 			throw new CommandNotExecutedException('Please execute the command first before retrieving the return status.');
 		}
 
@@ -94,26 +89,28 @@ class Command
 	 */
 	public function isValid()
 	{
-		if($this->isValid == null) {
-			throw new CommandNotExecutedException('Please execute the command first before checking the validity.');
-		}
-
-		return $this->isValid;
+		return ($this->getReturnStatus() == 0);
 	}
 
 	/**
 	 * Executes the command.
 	 *
+	 * @param bool $pretend Set to true to pretend the execution of the command.
 	 * @return void
 	 */
-	public function execute()
+	public function execute($pretend = false)
 	{
-		$output = array();
-		$returnStatus = null;
+		if (!$pretend) {
+			$output = array();
+			$returnStatus = null;
 
-		exec($this->command, $output, $returnStatus);
+			exec($this->command, $output, $returnStatus);
 
-		$this->output = $output;
-		$this->returnStatus = $returnStatus;
+			$this->output = $output;
+			$this->returnStatus = $returnStatus;
+		} else {
+			$this->output = array();
+			$this->returnStatus = 0;
+		}
 	}
 }

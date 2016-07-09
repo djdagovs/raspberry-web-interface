@@ -13,7 +13,7 @@ class Executor
 	private $logger;
 
 	/**
-	 * @var [type]
+	 * @var bool
 	 */
 	private $pretend;
 
@@ -31,14 +31,15 @@ class Executor
 	 */
 	public function execute($command)
 	{
-		if (!$this->pretend) {
-			$command = new Command($command);
-			$command->execute();
+		$command = new Command($command);
 
-			$this->logger->info('Executed command: '.$command->getCommand().'. Return status: '.$command->getReturnStatus());
-		} else {
-			$this->logger->info('[Pretend] Execute command: '.$command.'.');
+		if ($this->pretend) {
+			$this->logger->debug('The commands are not really executed, "pretend" is set to true.');
 		}
+
+		$command->execute();
+
+		$this->logger->info('Executed command: '.$command->getCommand().'. Return status: '.$command->getReturnStatus());
 
 		return $command;
 	}
