@@ -51,6 +51,7 @@ class Scanner
     public function getNetworks()
     {
         $this->scan();
+        sleep(3);
         $command = $this->commandExecutor->execute('wpa_cli scan_results');
         $networks = array();
 
