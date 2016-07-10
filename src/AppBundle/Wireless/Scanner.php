@@ -55,7 +55,14 @@ class Scanner
         $networks = array();
 
         if ($command->isValid()) {
-            foreach ($command->getOutput() as $row) {
+            $output = $command->getOutput();
+
+            // Remove comment rows
+            for ($i = 0; $i < 2; $i++) {
+                array_shift($output);
+            }
+
+            foreach ($output as $row) {
                 $networkRow = preg_split('/[\t]+/', $row);
                 $network = new Network($networkRow[0], $networkRow[1], $networkRow[2], $networkRow[3], $networkRow[4]);
 
