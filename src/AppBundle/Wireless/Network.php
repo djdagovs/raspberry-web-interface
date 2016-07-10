@@ -233,7 +233,7 @@ class Network
         // Check security
         if ($this->hasFlag('wep')) {
             // This network uses WEP :O
-            $this->security = self::$WEP;
+            $this->security = self::WEP;
             return;
         }
 
@@ -243,7 +243,7 @@ class Network
             ($this->hasFlag('wpa_tkip') || $this->hasFlag('wpa_aes')) &&
             ($this->hasFlag('wpa2_tkip') || $this->hasFlag('wpa2_aes'))
         ) {
-            $this->security = self::$WPA_WPA2_PSK_TKIP_AES;
+            $this->security = self::WPA_WPA2_PSK_TKIP_AES;
             return;
         }
 
@@ -251,13 +251,13 @@ class Network
         if ($this->hasFlag('wpa') && !$this->hasFlag('wpa2')) {
             // WPA-PSK-AES
             if ($this->hasFlag('wpa_aes')) {
-                $this->security = self::$WPA_PSK_AES;
+                $this->security = self::WPA_PSK_AES;
                 return;
             }
 
             // WPA-PSK-TKIP
             if ($this->hasFlag('wpa_tkip')) {
-                $this->security = self::$WPA_PSK_TKIP;
+                $this->security = self::WPA_PSK_TKIP;
                 return;
             }
         }
@@ -266,13 +266,13 @@ class Network
         if (!$this->hasFlag('wpa') && $this->hasFlag('wpa2')) {
             // WPA2-PSK-AES
             if ($this->hasFlag('wpa2_aes')) {
-                $this->security = self::$WPA2_PSK_AES;
+                $this->security = self::WPA2_PSK_AES;
                 return;
             }
 
             // WPA2-PSK-TKIP
             if ($this->hasFlag('wpa2_tkip')) {
-                $this->security = self::$WPA2_PSK_TKIP;
+                $this->security = self::WPA2_PSK_TKIP;
                 return;
             }
         }
