@@ -312,7 +312,7 @@ class NetworkInterface
      */
     public static function getAll(Executor $commandExecutor)
     {
-        $command = $commandExecutor->execute('ls /sys/class/net -a1');
+        $command = $commandExecutor->execute('ls /sys/class/net -1');
 
         if ($command->isValid()) {
             $interfaces = array();
