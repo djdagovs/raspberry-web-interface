@@ -6,3 +6,7 @@ services:
     app.command.executor:
         class: AppBundle\Command\Executor
         arguments: ['@logger', '%app_command_executor_pretend%']
+
+    app.wireless.scanner:
+        class: AppBundle\Wireless\Scanner
+        arguments: ['@logger', '@app.command.executor']

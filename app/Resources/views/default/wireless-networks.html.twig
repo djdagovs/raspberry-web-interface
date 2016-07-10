@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Wireless networks{% endblock %}
+
+{% block content %}
+    {% if networks %}
+        <section>
+            <div class="section-inner">
+                <h2>Networks</h2>
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <th>Name</th>
+                                <th>Channel</th>
+                                <th>Signal Level</th>
+                                <th>Security</th>
+                                <th></th>
+                            </tr>
+                            {% for network in networks %}
+                                <tr>
+                                    <td>{{ network.name }}</td>
+                                    <td>{{ network.channel }}</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="{{ network.signal_level }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ network.signal_level }}%">
+                                                {{ network.signal_level }}%
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{ network.security }}</td>
+                                    <td><a href="#" class="btn btn-primary">Connect</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    {% else %}
+        <section>
+            <div class="section-inner">
+                <p class="alert alert-danger">No wireless networks found.</p>
+            </div>
+        </section>
+    {% endif %}
+{% endblock %}
