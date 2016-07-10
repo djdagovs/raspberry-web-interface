@@ -2,20 +2,31 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Network\NetworkInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class DashboardController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/", name="dashboard")
      */
     public function indexAction(Request $request)
     {
+        $interface = NetworkInterface::get('en6', $this->get('app.command.executor'));
+        $wlan0 = [
+            'name' => $interface->getName(),
+            'operation_state' => $interface->getOperationState(),
+            'ip' => $interface->getIpAddress(),
+            'mac_address' => $interface->getMacAddress(),
+            'netmask' => $interface->getNetmask(),
+            'wireless_connection' => $interface->getWirelessConnectionDetails(),
+        ];
+
         // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
+        return $this->render('default/dashboard.html.twig', [
+            'interface' => $wlan0
         ]);
     }
 }
