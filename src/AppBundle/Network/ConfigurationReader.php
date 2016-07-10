@@ -18,7 +18,7 @@ class ConfigurationReader
 	 * Reads the configuration string and returns the matched value(s).
 	 *
 	 * @param string $expression The regular expression that matches the value.
-	 * @return string|array|null Returns the matched value as a string, or an array when there are more than 1 matches.
+	 * @return string|array Returns the matched value as a string, or an array when there are more than 1 matches.
 	 */
 	public function read($expression)
 	{
