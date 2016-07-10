@@ -68,6 +68,16 @@ class Command
 	}
 
 	/**
+	 * Returns the number of output rows of the executed command.
+	 *
+	 * @return int The number of output rows of the executed command.
+	 */
+	public function getOutputCount()
+	{
+		return count($this->getOutput());
+	}
+
+	/**
 	 * Returns the return status of the command.
 	 *
 	 * @return int The return status of the command.
