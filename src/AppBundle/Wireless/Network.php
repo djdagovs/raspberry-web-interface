@@ -200,7 +200,7 @@ class Network
     {
         preg_match('/(?P<wep>\[WEP\])?(?P<wpa>\[WPA-(?P<wpa_tkip>PSK-(?P<wpa_aes>CCMP\+)?TKIP)?\])?(?P<wpa2>\[WPA2-(?P<wpa2_tkip>PSK-(?P<wpa2_aes>CCMP\+)?TKIP)?\])?(?P<wps>\[WPS\])?/i', $this->flags, $matches);
 
-        return array_key_exists($flag, $matches);
+        return array_key_exists($flag, $matches) && !empty($matches[$flag]);
     }
 
     /**
