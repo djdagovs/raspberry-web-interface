@@ -14,7 +14,7 @@ class DashboardController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $interface = NetworkInterface::get('en6', $this->get('app.command.executor'));
+        $interface = NetworkInterface::get('wlan0', $this->get('app.command.executor'));
         $wlan0 = [
             'name' => $interface->getName(),
             'operation_state' => $interface->getOperationState(),
