@@ -196,7 +196,7 @@ class Network
      * @param $flag string The flag to check.
      * @return bool True if the network has the given flag, false otherwise.
      */
-    private hasFlag($flag)
+    private function hasFlag($flag)
     {
         preg_match('/(?P<wep>\[WEP\])?(?P<wpa>\[WPA-(?P<wpa_tkip>PSK-(?P<wpa_aes>CCMP\+)?TKIP)?\])?(?P<wpa2>\[WPA2-(?P<wpa2_tkip>PSK-(?P<wpa2_aes>CCMP\+)?TKIP)?\])?(?P<wps>\[WPS\])?/i', $this->flags, $matches);
 
@@ -209,7 +209,7 @@ class Network
      * @param $flags array The array of flags to check.
      * @return bool True if the network has the given flags, false otherwise.
      */
-    private hasFlags(array $flags)
+    private function hasFlags(array $flags)
     {
         foreach ($flags as $flag) {
             if (!$this->hasFlag($flag)) {
