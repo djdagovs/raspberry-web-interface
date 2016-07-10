@@ -95,13 +95,15 @@ class NetworkInterface
             'down' => ['Interface is down', 'danger'],
         ];
 
-        if (!is_null($this->operationState)) {
-            if ($this->populateInterfaceConfiguration()) {
-                return $this->operationState;
-            }
+        if (is_null($this->operationState)) {
+            $this->populateInterfaceConfiguration();
         }
 
-        return null;
+        if (isset($operationStates[$this->operationState])) {
+            return $operationStates[$this->operationState];
+        }
+
+        return $this->operationState;
     }
 
     /**
@@ -111,10 +113,8 @@ class NetworkInterface
      */
     public function getMacAddress()
     {
-        if (!is_null($this->macAddress)) {
-            if ($this->populateInterfaceConfiguration()) {
-                return $this->macAddress;
-            }
+        if (is_null($this->macAddress)) {
+            $this->populateInterfaceConfiguration();
         }
 
         return null;
@@ -127,10 +127,8 @@ class NetworkInterface
      */
     public function getIpAddress()
     {
-        if (!is_null($this->ipAddress)) {
-            if ($this->populateInterfaceConfiguration()) {
-                return $this->ipAddress;
-            }
+        if (is_null($this->ipAddress)) {
+            $this->populateInterfaceConfiguration();
         }
 
         return null;
@@ -143,10 +141,8 @@ class NetworkInterface
      */
     public function getNetmask()
     {
-        if (!is_null($this->netmask)) {
-            if ($this->populateInterfaceConfiguration()) {
-                return $this->netmask;
-            }
+        if (is_null($this->netmask)) {
+            $this->populateInterfaceConfiguration();
         }
 
         return null;
@@ -159,10 +155,8 @@ class NetworkInterface
      */
     public function getRxPacketsCount()
     {
-        if (!is_null($this->rxPacketsCount)) {
-            if ($this->populateInterfaceConfiguration()) {
-                return $this->rxPacketsCount;
-            }
+        if (is_null($this->rxPacketsCount)) {
+            $this->populateInterfaceConfiguration();
         }
 
         return null;
@@ -175,10 +169,8 @@ class NetworkInterface
      */
     public function getTxPacketsCount()
     {
-        if (!is_null($this->txPacketsCount)) {
-            if ($this->populateInterfaceConfiguration()) {
-                return $this->txPacketsCount;
-            }
+        if (is_null($this->txPacketsCount)) {
+            $this->populateInterfaceConfiguration();
         }
 
         return null;
@@ -191,10 +183,8 @@ class NetworkInterface
      */
     public function getRxBytesCount()
     {
-        if (!is_null($this->rxBytesCount)) {
-            if ($this->populateInterfaceConfiguration()) {
-                return $this->rxBytesCount;
-            }
+        if (is_null($this->rxBytesCount)) {
+            $this->populateInterfaceConfiguration();
         }
 
         return null;
@@ -207,10 +197,8 @@ class NetworkInterface
      */
     public function getTxBytesCount()
     {
-        if (!is_null($this->txBytesCount)) {
-            if ($this->populateInterfaceConfiguration()) {
-                return $this->txBytesCount;
-            }
+        if (is_null($this->txBytesCount)) {
+            $this->populateInterfaceConfiguration();
         }
 
         return null;

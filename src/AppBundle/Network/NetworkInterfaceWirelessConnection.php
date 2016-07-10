@@ -65,10 +65,8 @@ class NetworkInterfaceWirelessConnection
      */
     public function getNetworkSsid()
     {
-        if (!is_null($this->networkSsid)) {
-            if ($this->populateNetworkConnectionDetails()) {
-                return $this->networkSsid;
-            }
+        if (is_null($this->networkSsid)) {
+            $this->populateNetworkConnectionDetails();
         }
 
         return $this->networkSsid;
@@ -81,10 +79,8 @@ class NetworkInterfaceWirelessConnection
      */
     public function getNetworkBssid()
     {
-        if (!is_null($this->networkBssid)) {
-            if ($this->populateNetworkConnectionDetails()) {
-                return $this->networkBssid;
-            }
+        if (is_null($this->networkBssid)) {
+            $this->populateNetworkConnectionDetails();
         }
 
         return $this->networkBssid;
@@ -97,10 +93,8 @@ class NetworkInterfaceWirelessConnection
      */
     public function getNetworkBitrate()
     {
-        if (!is_null($this->networkBitrate)) {
-            if ($this->populateNetworkConnectionDetails()) {
-                return $this->networkBitrate;
-            }
+        if (is_null($this->networkBitrate)) {
+            $this->populateNetworkConnectionDetails();
         }
 
         return $this->networkBitrate;
@@ -113,10 +107,8 @@ class NetworkInterfaceWirelessConnection
      */
     public function getNetworkTxPower()
     {
-    	if (!is_null($this->networkTxPower)) {
-            if ($this->populateNetworkConnectionDetails()) {
-                return $this->networkTxPower;
-            }
+    	if (is_null($this->networkTxPower)) {
+            $this->populateNetworkConnectionDetails();
         }
 
         return $this->networkTxPower;
@@ -129,10 +121,8 @@ class NetworkInterfaceWirelessConnection
      */
     public function getNetworkLinkQuality()
     {
-    	if (!is_null($this->networkLinkQuality)) {
-            if ($this->populateNetworkConnectionDetails()) {
-                return $this->networkLinkQuality;
-            }
+    	if (is_null($this->networkLinkQuality)) {
+            $this->populateNetworkConnectionDetails();
         }
 
         return $this->networkLinkQuality;
@@ -161,10 +151,8 @@ class NetworkInterfaceWirelessConnection
      */
     public function getNetworkSignalLevel()
     {
-        if (!is_null($this->networkSignalLevel)) {
-            if ($this->populateNetworkConnectionDetails()) {
-                return $this->networkSignalLevel;
-            }
+        if (is_null($this->networkSignalLevel)) {
+            $this->populateNetworkConnectionDetails();
         }
 
         return $this->networkSignalLevel;
@@ -200,10 +188,8 @@ class NetworkInterfaceWirelessConnection
      */
     public function getNetworkFrequency()
     {
-        if (!is_null($this->networkFrequency)) {
-            if ($this->populateNetworkConnectionDetails()) {
-                return $this->networkFrequency;
-            }
+        if (is_null($this->networkFrequency)) {
+            $this->populateNetworkConnectionDetails();
         }
 
         return $this->networkFrequency;
