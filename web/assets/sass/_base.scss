@@ -8,6 +8,12 @@ body {
 	-webkit-font-smoothing: antialiased;
 }
 
+p {
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
 a {
 	transition: background .2s linear, color .2s linear;
 }
