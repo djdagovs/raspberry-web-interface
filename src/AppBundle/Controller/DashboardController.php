@@ -24,7 +24,6 @@ class DashboardController extends Controller
             'wireless_connection' => $interface->getWirelessConnectionDetails(),
         ];
 
-        // replace this example code with whatever you need
         return $this->render('default/dashboard.html.twig', [
             'interface' => $wlan0
         ]);

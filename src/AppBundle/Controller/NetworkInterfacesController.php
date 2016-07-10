@@ -30,7 +30,6 @@ class NetworkInterfacesController extends Controller
             }
         }
 
-        // replace this example code with whatever you need
         return $this->render('default/network-interfaces.html.twig', [
             'interfaces' => $data
         ]);
