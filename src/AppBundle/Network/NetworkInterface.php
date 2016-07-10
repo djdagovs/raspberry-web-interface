@@ -244,7 +244,7 @@ class NetworkInterface
                 'bitrate' => $wirelessConnection->getNetworkBitrate(),
                 'frequency' => $wirelessConnection->getNetworkFrequency(),
                 'link_quality' => $wirelessConnection->getNetworkLinkQualityPercentage(),
-                'signal_level' => $wirelessConnection->getNetworkSignalLevel(),
+                'signal_level' => $wirelessConnection->getNetworkSignalLevelPercentage(),
             ];
         }
 
