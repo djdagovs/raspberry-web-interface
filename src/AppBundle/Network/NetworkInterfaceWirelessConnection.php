@@ -181,14 +181,12 @@ class NetworkInterfaceWirelessConnection
         $networkSignalLevel = $this->getNetworkSignalLevel();
 
         if (!is_null($networkSignalLevel)) {
-            $percentage = 2 * ($networkSignalLevel + 100);
-
-            if ($percentage < 0) {
+            if ($networkSignalLevel < -100) {
                 return 0;
-            } elseif ($percentage > 100) {
+            } elseif ($networkSignalLevel > -50) {
                 return 100;
             } else {
-                return $percentage;
+                return 2 * ($networkSignalLevel + 100);
             }
         }
 
