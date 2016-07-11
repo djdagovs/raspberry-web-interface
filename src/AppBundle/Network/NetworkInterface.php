@@ -224,7 +224,7 @@ class NetworkInterface
         if ($command->isValid()) {
             $output = implode(' ', $command->getOutput());
 
-            if (empty($output) || strpos('no wireless extensions', $output) !== false) {
+            if (empty($output) || strpos($output, 'no wireless extensions') !== false) {
                 return null;
             }
         }
