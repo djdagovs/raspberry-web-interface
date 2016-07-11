@@ -12,14 +12,15 @@
                     <table class="table table-striped">
                         <tbody>
                             <tr>
+                                <th></th>
                                 <th>Name</th>
                                 <th>Channel</th>
                                 <th>Signal Level</th>
-                                <th>Security</th>
                                 <th></th>
                             </tr>
                             {% for network in networks %}
                                 <tr>
+                                    <td><i class="fa {{ network.security == 'open' ? 'fa-unlock' : 'fa-lock' }}" aria-hidden="true"></i></td>
                                     <td>{{ network.ssid }}</td>
                                     <td>{{ network.channel }}</td>
                                     <td>
