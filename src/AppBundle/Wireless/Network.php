@@ -33,7 +33,7 @@ class Network
      */
     private $status;
 
-    public function __construct($id, $ssid, $bssid, $status)
+    public function __construct($id, $ssid, $bssid, $flags)
     {
         $this->id = $id;
         $this->ssid = $ssid;
