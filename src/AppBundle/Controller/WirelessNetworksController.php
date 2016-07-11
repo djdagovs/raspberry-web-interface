@@ -68,7 +68,7 @@ class WirelessNetworksController extends Controller
 
         $id = $request->request->get('id', null);
 
-        if (!is_null($id) && !empty($id)) {
+        if (!is_null($id) && is_numeric($id)) {
             if ($networkManager->enableNetwork($id)) {
                 $this->addFlash('success', 'Network succesfully enabled.');
             } else {
@@ -89,7 +89,7 @@ class WirelessNetworksController extends Controller
 
         $id = $request->request->get('id', null);
 
-        if (!is_null($id) && !empty($id)) {
+        if (!is_null($id) && is_numeric($id)) {
             if ($networkManager->disableNetwork($id)) {
                 $this->addFlash('success', 'Network succesfully disabled.');
             } else {
@@ -110,7 +110,7 @@ class WirelessNetworksController extends Controller
 
         $id = $request->request->get('id', null);
 
-        if (!is_null($id) && !empty($id)) {
+        if (!is_null($id) && is_numeric($id)) {
             if ($networkManager->removeNetwork($id)) {
                 $this->addFlash('success', 'Network succesfully removed.');
             } else {
