@@ -200,7 +200,7 @@ class Network
      */
     private function hasFlag($flag)
     {
-        preg_match('/(?P<wep>\[WEP\])?(?P<wpa_psk>\[WPA-PSK(?P<wpa_psk_aes>-CCMP)?((\+|\-)(?P<wpa_psk_tkip>TKIP))?\])?(?P<wpa2_psk>\[WPA2-PSK(?P<wpa2_psk_aes>-CCMP)?((\+|\-)(?P<wpa2_psk_tkip>TKIP))?\])?(?P<wpa2_eap>\[WPA2-EAP(?P<wpa2_eap_aes>-CCMP)?\])?(?P<wps>\[WPS\])?/i', $this->flags, $matches);
+        preg_match('/(?P<wpa_psk>\[WPA-PSK(?P<wpa_psk_aes>-CCMP)?((\+|\-)(?P<wpa_psk_tkip>TKIP))?\])?(?P<wpa2_psk>\[WPA2-PSK(?P<wpa2_psk_aes>-CCMP)?((\+|\-)(?P<wpa2_psk_tkip>TKIP))?\])?(?P<wpa2_eap>\[WPA2-EAP(?P<wpa2_eap_aes>-CCMP)?\])?(?P<wps>\[WPS\])?(?P<wep>\[WEP\])?/i', $this->flags, $matches);
 
         return array_key_exists($flag, $matches) && !empty($matches[$flag]);
     }
