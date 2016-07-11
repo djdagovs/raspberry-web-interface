@@ -25,10 +25,10 @@
                                     <td>{{ network.bssid }}</td>
                                     <td>{{ network.status }}</td>
                                     <td>
-                                        {% if network.status == 'Enabled' %}
-                                            <a href="#" class="btn btn-warning btn-xs">Disable</a>
-                                        {% else %}
+                                        {% if network.status != 'Disabled' %}
                                             <a href="#" class="btn btn-primary btn-xs">Enable</a>
+                                        {% else %}
+                                            <a href="#" class="btn btn-warning btn-xs">Disable</a>
                                         {% endif %}
                                         <a href="#" class="btn btn-danger btn-xs">Remove</a>
                                     </td>
