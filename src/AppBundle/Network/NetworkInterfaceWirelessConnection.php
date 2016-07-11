@@ -138,7 +138,7 @@ class NetworkInterfaceWirelessConnection
         $networkLinkQuality = $this->getNetworkLinkQuality();
 
         if (!is_null($networkLinkQuality)) {
-            return ($networkLinkQuality[0] / $networkLinkQuality[1]) * 100;
+            return ($networkLinkQuality[1] / $networkLinkQuality[2]) * 100;
         }
 
         return null;
@@ -210,7 +210,6 @@ class NetworkInterfaceWirelessConnection
 
             $configurationReader = new ConfigurationReader($iwconfig);
 
-            // Network SSID
             $this->networkSsid = $configurationReader->read('/ESSID:\"([a-zA-Z0-9\s]+)\"/i');
             $this->networkBssid = $configurationReader->read('/Access Point: ([0-9a-f:]+)/i');
             $this->networkBitrate = $configurationReader->read('/Bit Rate=([0-9.]+ Mb\/s)/i');
