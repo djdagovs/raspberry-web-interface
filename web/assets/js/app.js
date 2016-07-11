@@ -14,7 +14,7 @@ $(document).ready(function() {
         connectForm.find('#security').val(security);
         connectForm.find('#key-management').val(keyManagement);
 
-        if (security !== 'Open') {
+        if (security === 'Open') {
             connectForm.find('#connect-modal-form-password').hide();
         } else {
             connectForm.find('#connect-modal-form-password').show();
