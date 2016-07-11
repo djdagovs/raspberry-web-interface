@@ -111,7 +111,7 @@ class NetworkInterface
             return $operationStates[$this->operationState];
         }
 
-        return $this->operationState;
+        return null;
     }
 
     /**
