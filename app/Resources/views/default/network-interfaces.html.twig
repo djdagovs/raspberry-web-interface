@@ -47,7 +47,7 @@
                                             <td>Subnet Mask</td>
                                             <td>{{ interface.netmask ? interface.netmask : 'Unknown' }}</td>
                                         </tr>
-                                        {% if interface.wireless_connection %}
+                                        {% if interface.wireless_connection != null %}
                                             <tr>
                                                 <td>Link Quality</td>
                                                 <td>
