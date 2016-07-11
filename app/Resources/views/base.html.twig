@@ -41,13 +41,13 @@
             <!-- Navigation -->
             <nav id="navigation" class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm" role="navigation">
                 <ul class="nav navmenu-nav">
-                    <li>
+                    <li{% if app.request.attributes.get( '_route' ) starts with 'dashboard' %} class="active"{% endif %}>
                         <a href="{{ url('dashboard') }}"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard
                         </a>
                     </li>
-                    <li><a href="{{ url('wireless_networks') }}"><i class="fa fa-wifi" aria-hidden="true"></i> Wireless networks</a></li>
-                    <li><a href="{{ url('network_interfaces') }}"><i class="fa fa-plug" aria-hidden="true"></i> Network interfaces</a></li>
-                    <li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> System</a></li>
+                    <li{% if app.request.attributes.get( '_route' ) starts with 'wireless_networks' %} class="active"{% endif %}><a href="{{ url('wireless_networks') }}"><i class="fa fa-wifi" aria-hidden="true"></i> Wireless networks</a></li>
+                    <li{% if app.request.attributes.get( '_route' ) starts with 'network_interfaces' %} class="active"{% endif %}><a href="{{ url('network_interfaces') }}"><i class="fa fa-plug" aria-hidden="true"></i> Network interfaces</a></li>
+                    <li{% if app.request.attributes.get( '_route' ) starts with 'settings' %} class="active"{% endif %}><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> System</a></li>
                 </ul>
             </nav>
 
