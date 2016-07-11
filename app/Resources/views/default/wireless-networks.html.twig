@@ -13,6 +13,7 @@
                         <tbody>
                             <tr>
                                 <th></th>
+                                <th>#</th>
                                 <th>Name</th>
                                 <th>Preferred BSSID</th>
                                 <th>Status</th>
@@ -22,6 +23,7 @@
                             {% for network in saved_networks %}
                                 <tr{{ network.current ? ' class="current"' : '' }}>
                                     <td class="text-center"><i class="fa {{ network.current ? 'fa-circle' : 'fa-circle-o' }}" aria-hidden="true"></i></td>
+                                    <td>{{ network.id }}</td>
                                     <td>{{ network.ssid }}</td>
                                     <td>{{ network.bssid }}</td>
                                     <td>{{ network.status }}</td>
@@ -65,7 +67,6 @@
                         <tbody>
                             <tr>
                                 <th></th>
-                                <th>#</th>
                                 <th>Name</th>
                                 <th>Channel</th>
                                 <th>Signal Level</th>
@@ -74,7 +75,6 @@
                             {% for network in networks %}
                                 <tr>
                                     <td class="text-center"><i class="fa {{ network.security == 'Open' ? 'fa-unlock' : 'fa-lock' }}" aria-hidden="true"></i></td>
-                                    <td>{{ network.id }}</td>
                                     <td>{{ network.ssid }}</td>
                                     <td>{{ network.channel }}</td>
                                     <td>
