@@ -24,6 +24,16 @@ table {
 	}
 }
 
+.table {
+	> thead, tbody, tfoot {
+		> tr {
+			> th, td {
+				vertical-align: middle;
+			}
+		}
+	}
+}
+
 header {
 	background: $primary-color;
 	font-weight: 600;
