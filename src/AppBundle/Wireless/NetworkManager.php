@@ -102,22 +102,23 @@ class NetworkManager
 
             if (isset($output[0])) {
                 $networkId = $output[0];
-                $this->commandExecutor->execute(sprintf('wpa_cli set_network %d ssid \'"%s"\'', $networkId, $ssid));
+                $this->commandExecutor->execute(sprintf('wpa_cli -i %s set_network %d ssid \'"%s"\'', $this->interface->getName(), $networkId, $ssid));
 
                 if (is_null($password)) {
                     // Add network without PSK, set key management to none.
-                    $this->commandExecutor->execute(sprintf('wpa_cli set_network %d key_mgmt NONE', $networkId));
+                    $this->commandExecutor->execute(sprintf('wpa_cli -i %s set_network %d key_mgmt NONE', $this->interface->getName(), $networkId));
                 } else {
                     // Add network with PSK and set key management.
-                    $this->commandExecutor->execute(sprintf('wpa_cli set_network %d key_mgmt %s', $networkId, $keyManagement));
+                    $this->commandExecutor->execute(sprintf('wpa_cli -i %s set_network %d psk \'"%s"\'', $this->interface->getName(), $networkId, $password));
+                    $this->commandExecutor->execute(sprintf('wpa_cli -i %s set_network %d key_mgmt %s', $this->interface->getName(), $networkId, $keyManagement));
                 }
 
                 // Set preferred BSSID if not null
                 if (!is_null($preferredBssid)) {
-                    $command = $this->commandExecutor->execute(sprintf('wpa_cli bssid %d %s', $networkId, $preferredBssid));
+                    $command = $this->commandExecutor->execute(sprintf('wpa_cli -i %s bssid %d %s', $this->interface->getName(), $networkId, $preferredBssid));
                 }
 
-                $command = $this->commandExecutor->execute(sprintf('wpa_cli enable_network %d', $networkId));
+                $command = $this->commandExecutor->execute(sprintf('wpa_cli -i %s enable_network %d', $this->interface->getName(), $networkId));
             }
         }
 
