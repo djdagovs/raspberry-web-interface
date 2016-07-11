@@ -30,7 +30,7 @@ $content-border-color:	darken($content-bg, 10%);
 // Jasny Bootstrap
 // Navmenu
 
-$zindex-navmenu-fixed:              3000;
+$zindex-navmenu-fixed:              $zindex-navbar-fixed;
 
 // Basics of a navmenu
 $navmenu-width:                     250px;
