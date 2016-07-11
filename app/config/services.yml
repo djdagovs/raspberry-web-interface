@@ -7,6 +7,10 @@ services:
         class: AppBundle\Command\Executor
         arguments: ['@logger', '%app_command_executor_pretend%']
 
+    app.network.preferred_interface:
+        class: AppBundle\Network\NetworkInterface
+        arguments: ['%app_preferred_network_interface%', '@app.command.executor']
+
     app.wireless.scanner:
-        class: AppBundle\Wireless\Scanner
-        arguments: ['@logger', '@app.command.executor']
+        class: AppBundle\Wireless\Scanner\Scanner
+        arguments: ['@app.network.preferred_interface', '@logger', '@app.command.executor']

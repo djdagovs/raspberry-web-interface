@@ -5,9 +5,15 @@ namespace AppBundle\Wireless\Scanner;
 use Psr\Log\LoggerInterface;
 use AppBundle\Command\Executor;
 use AppBundle\Wireless\Scanner\Result;
+use AppBundle\Network\NetworkInterface;
 
 class Scanner
 {
+    /**
+     * @var NetworkInterface
+     */
+    private $interface;
+
     /**
     * @var LoggerInterface
     */
@@ -18,8 +24,9 @@ class Scanner
     */
     private $commandExecutor;
 
-    public function __construct(LoggerInterface $logger, Executor $commandExecutor)
+    public function __construct(NetworkInterface $interface, LoggerInterface $logger, Executor $commandExecutor)
     {
+        $this->interface = $interface;
         $this->logger = $logger;
         $this->commandExecutor = $commandExecutor;
     }
@@ -31,7 +38,7 @@ class Scanner
      */
     public function scan()
     {
-        $command = $this->commandExecutor->execute('wpa_cli scan');
+        $command = $this->commandExecutor->execute('wpa_cli -i '.$this->interface->getName().' scan');
 
         if ($command->isValid()) {
             $output = implode(' ', $command->getOutput());
@@ -58,7 +65,7 @@ class Scanner
             sleep(3);
         }
 
-        $command = $this->commandExecutor->execute('wpa_cli scan_results');
+        $command = $this->commandExecutor->execute('wpa_cli -i '.$this->interface->getName().' scan_results');
         $results = array();
 
         if ($command->isValid()) {

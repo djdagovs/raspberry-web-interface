@@ -18,4 +18,5 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
+    app_preferred_network_interface: wlan0
     app_command_executor_pretend: false

@@ -16,7 +16,7 @@ class WirelessNetworksController extends Controller
     	$scanner = $this->get('app.wireless.scanner');
 
         return $this->render('default/wireless-networks.html.twig', [
-        	'networks' => $scanner->getNetworks(),
+        	'networks' => $scanner->getResults(),
         ]);
     }
 }
