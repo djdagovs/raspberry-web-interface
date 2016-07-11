@@ -200,6 +200,7 @@ class Result
             'channel' => $this->getChannel(),
             'signal_level' => $this->getSignalLevelPercentage(),
             'security' => $this->getSecurity(),
+            'key_management' => $this->getKeyManagement(),
             'wps' => $this->hasWpsEnabled(),
         ];
     }
