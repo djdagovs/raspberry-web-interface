@@ -122,6 +122,9 @@ class NetworkManager
             }
         }
 
+        // Save configuration
+        $command = $this->commandExecutor->execute('wpa_cli save_config');
+
         // Check if the network is added
         if ($command->isValid()) {
             $this->logger->info(sprintf('Succesfully added "%s" to the WPA supplicant configuration file.', $ssid), $command->getOutput());
