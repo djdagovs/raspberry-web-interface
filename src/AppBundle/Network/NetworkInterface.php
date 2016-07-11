@@ -229,6 +229,18 @@ class NetworkInterface
     }
 
     /**
+     * Returns true if the interface is a wireless interface.
+     *
+     * @return boolean True if the interface is a wireless interface.
+     */
+    public function isWireless()
+    {
+        $wirelessConnection = $this->getWirelessConnection();
+
+        return ($wirelessConnection != null);
+    }
+
+    /**
      * Returns the connection of the interface.
      *
      * @return string The connection of the interface.
@@ -236,6 +248,10 @@ class NetworkInterface
     public function getWirelessConnection()
     {
         $command = $this->commandExecutor->execute('/sbin/iwconfig '.$this->name);
+
+        if (!$command->isValid()) {
+            return null;
+        }
 
         if ($command->isValid()) {
             $output = implode(' ', $command->getOutput());
