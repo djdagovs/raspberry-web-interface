@@ -69,12 +69,8 @@ class Scanner
         $results = array();
 
         if ($command->isValid()) {
-            $output = $command->getOutput();
-
-            // Remove comment rows
-            for ($i = 0; $i < 1; $i++) {
-                array_shift($output);
-            }
+            // Offset 1 removes the comment lines
+            $output = $command->getOutput(1);
 
             foreach ($output as $row) {
                 $result = new Result($row);
