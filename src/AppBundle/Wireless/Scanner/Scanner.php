@@ -77,7 +77,7 @@ class Scanner
                 $results[] = $result->getDetails();
             }
 
-            $this->logger->info('Found '.$command->getOutputCount().' networks.');
+            $this->logger->info('Found '.$command->getOutputCount(1).' network(s).');
         }
 
         return $results;

@@ -70,7 +70,7 @@ class NetworkManager
                 $networks[] = $result->getDetails();
             }
 
-            $this->logger->info('Found '.$command->getOutputCount().' saved networks.');
+            $this->logger->info('Found '.$command->getOutputCount(1).' saved network(s).');
         }
 
         return $networks;
