@@ -19,16 +19,16 @@
                                 <th></th>
                             </tr>
                             {% for network in saved_networks %}
-                                <tr{{ network.status == 'Current' ? 'class="current"' : '' }}>
-                                    <td class="text-center"><i class="fa {{ network.status == 'Current' ? 'fa-circle' : 'fa-circle-o' }}" aria-hidden="true"></i></td>
+                                <tr{{ network.current ? 'class="current"' : '' }}>
+                                    <td class="text-center"><i class="fa {{ network.status ? 'fa-circle' : 'fa-circle-o' }}" aria-hidden="true"></i></td>
                                     <td>{{ network.ssid }}</td>
                                     <td>{{ network.bssid }}</td>
                                     <td>{{ network.status }}</td>
                                     <td>
-                                        {% if network.status == 'Deactivated' %}
-                                            <a href="#" class="btn btn-warning btn-xs">Deactivate</a>
+                                        {% if network.status == 'Enabled' %}
+                                            <a href="#" class="btn btn-warning btn-xs">Disable</a>
                                         {% else %}
-                                            <a href="#" class="btn btn-primary btn-xs">Activate</a>
+                                            <a href="#" class="btn btn-primary btn-xs">Enable</a>
                                         {% endif %}
                                         <a href="#" class="btn btn-danger btn-xs">Remove</a>
                                     </td>
