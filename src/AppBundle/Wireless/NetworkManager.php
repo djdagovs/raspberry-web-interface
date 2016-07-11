@@ -67,7 +67,10 @@ class NetworkManager
 
             foreach ($output as $row) {
                 $result = Network::fromRow($row);
-                $networks[] = $result->getDetails();
+
+                if (!is_null($result)) {
+                    $networks[] = $result->getDetails();
+                }
             }
 
             $this->logger->info('Found '.$command->getOutputCount(1).' saved network(s).');

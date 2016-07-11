@@ -179,14 +179,17 @@ class Network
      */
     public static function fromRow($row)
     {
-        $row = preg_match('/(?P<id>[0-9]+)\s(?P<ssid>[a-zA-Z0-9 ]+)?\s(?P<bssid>[0-9a-zA-Z\:]+)\s(?P<flags>.*)/', $row, $matches);
-        $id = $matches['id'];
-        $ssid = isset($matches['ssid']) ? $matches['ssid'] : null;
-        $bssid = $matches['bssid'];
-        $flags = $matches['flags'];
+        if (preg_match('/(?P<id>[0-9]+)\s?(?P<ssid>[a-zA-Z0-9 ]+)?\s?(?P<bssid>[0-9a-zA-Z\:]+)?\s?(?P<flags>.*)?/', $row, $matches)) {
+            $id = $matches['id'];
+            $ssid = isset($matches['ssid']) ? $matches['ssid'] : null;
+            $bssid = $matches['bssid'];
+            $flags = $matches['flags'];
 
-        $network = new Network($id, $ssid, $bssid, $flags);
+            $network = new Network($id, $ssid, $bssid, $flags);
 
-        return $network;
+            return $network;
+        }
+
+        return null;
     }
 }
