@@ -14,3 +14,7 @@ services:
     app.wireless.scanner:
         class: AppBundle\Wireless\Scanner\Scanner
         arguments: ['@app.network.preferred_interface', '@logger', '@app.command.executor']
+
+    app.wireless.network_manager:
+        class: AppBundle\Wireless\NetworkManager
+        arguments: ['@app.network.preferred_interface', '%app_wpa_supplicant_config_file%', '@logger', '@app.command.executor']
