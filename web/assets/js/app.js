@@ -16,8 +16,10 @@ $(document).ready(function() {
 
         if (security === 'Open') {
             connectForm.find('#connect-modal-form-password').hide();
+            connectForm.find('#password').prop('disabled', true);
         } else {
             connectForm.find('#connect-modal-form-password').show();
+            connectForm.find('#password').prop('disabled', false);
         }
     });
 
