@@ -12,6 +12,9 @@ class Result
     const WPA2_PSK_AES = 'WPA2-PSK (AES)';
     const WPA_WPA2_PSK_TKIP_AES = 'WPA/WPA2-PSK (TKIP/AES)';
     const WPA2_EAP_AES = 'WPA2-EAP (AES)';
+    const KEY_MANAGEMENT_WPA_PSK = 'WPA-PSK';
+    const KEY_MANAGEMENT_WPA_EAP = 'WPA-PSK';
+    const KEY_MANAGEMENT_NONE = 'NONE';
 
     /**
      * @var string
@@ -42,6 +45,11 @@ class Result
      * @var string
      */
     private $security;
+
+    /**
+     * @var string
+     */
+    private $keyManagement;
 
     /**
      * @var bool
@@ -159,6 +167,16 @@ class Result
     }
 
     /**
+     * Returns the key management setting of the network.
+     *
+     * @return string The key management setting of the network.
+     */
+    public function getKeyManagement()
+    {
+        return $this->keyManagement;
+    }
+
+    /**
      * Returns true if the network has WPS enabled.
      *
      * @return boolean True if the network has WPS enabled, false otherwise.
@@ -230,6 +248,7 @@ class Result
         if ($this->hasFlag('wep')) {
             // This network uses WEP :O
             $this->security = self::WEP;
+            $this->keyManagement = self::KEY_MANAGEMENT_NONE;
             return;
         }
 
@@ -240,6 +259,7 @@ class Result
             ($this->hasFlag('wpa2_psk_tkip') || $this->hasFlag('wpa2_psk_aes'))
         ) {
             $this->security = self::WPA_WPA2_PSK_TKIP_AES;
+            $this->keyManagement = self::KEY_MANAGEMENT_WPA_PSK;
             return;
         }
 
@@ -248,12 +268,14 @@ class Result
             // WPA-PSK-AES
             if ($this->hasFlag('wpa_psk_aes')) {
                 $this->security = self::WPA_PSK_AES;
+                $this->keyManagement = self::KEY_MANAGEMENT_WPA_PSK;
                 return;
             }
 
             // WPA-PSK-TKIP
             if ($this->hasFlag('wpa_psk_tkip')) {
                 $this->security = self::WPA_PSK_TKIP;
+                $this->keyManagement = self::KEY_MANAGEMENT_WPA_PSK;
                 return;
             }
         }
@@ -263,12 +285,14 @@ class Result
             // WPA2-PSK-AES
             if ($this->hasFlag('wpa2_psk_aes')) {
                 $this->security = self::WPA2_PSK_AES;
+                $this->keyManagement = self::KEY_MANAGEMENT_WPA_PSK;
                 return;
             }
 
             // WPA2-PSK-TKIP
             if ($this->hasFlag('wpa2_psk_tkip')) {
                 $this->security = self::WPA2_PSK_TKIP;
+                $this->keyManagement = self::KEY_MANAGEMENT_WPA_PSK;
                 return;
             }
         }
@@ -277,6 +301,7 @@ class Result
         if ($this->hasFlag('wpa2_eap')) {
             if ($this->hasFlag('wpa2_eap_aes')) {
                 $this->security = self::WPA2_EAP_AES;
+                $this->keyManagement = self::KEY_MANAGEMENT_WPA_EAP;
                 return;
             }
         }
@@ -284,6 +309,7 @@ class Result
         // No security
         if (!$this->hasFlags(['wep', 'wpa_psk', 'wpa2_psk', 'wpa2_eap'])) {
             $this->security = self::OPEN;
+            $this->keyManagement = self::KEY_MANAGEMENT_NONE;
             return;
         }
     }
