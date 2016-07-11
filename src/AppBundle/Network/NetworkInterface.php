@@ -296,7 +296,7 @@ class NetworkInterface
      */
     private static function isExcludedInterface($interfaceName)
     {
-        return in_array($interfaceName, $this->excludedInterfaces);
+        return in_array($interfaceName, NetworkInterface::$excludedInterfaces);
     }
 
     /**
