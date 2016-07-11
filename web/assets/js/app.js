@@ -25,6 +25,9 @@ $(document).ready(function() {
 
     $('#connect-modal').on('shown.bs.modal', function () {
         connectForm.find('#password').focus();
-    })
+    });
+
+    // Tooltips
+    $('[data-toggle="tooltip"]').tooltip();
 
 });
