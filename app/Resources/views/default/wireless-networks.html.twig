@@ -20,7 +20,7 @@
                             </tr>
                             {% for network in networks %}
                                 <tr>
-                                    <td><i class="fa {{ network.security == 'Open' ? 'fa-unlock' : 'fa-lock' }}" aria-hidden="true"></i></td>
+                                    <td class="text-center"><i class="fa {{ network.security == 'Open' ? 'fa-unlock' : 'fa-lock' }}" aria-hidden="true"></i></td>
                                     <td>{{ network.ssid }}</td>
                                     <td>{{ network.channel }}</td>
                                     <td>
@@ -30,7 +30,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td><a href="#" class="btn btn-primary">Connect</a></td>
+                                    <td class="text-center"><a href="#" class="btn btn-primary">Connect</a></td>
                                 </tr>
                             {% endfor %}
                         </tbody>

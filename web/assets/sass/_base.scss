@@ -106,3 +106,9 @@ main {
 		}
 	}
 }
+
+.progress {
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
