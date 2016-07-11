@@ -4,11 +4,19 @@ namespace AppBundle\Network;
 
 use Psr\Log\LoggerInterface;
 use AppBundle\Command\Executor;
+use AppBundle\Exception\NetworkException;
 use AppBundle\Network\ConfigurationReader;
 use AppBundle\Network\NetworkInterfaceWirelessConnection;
 
 class NetworkInterface
 {
+    /**
+     * @var array
+     */
+    private static $excludedInterfaces = [
+        'lo'
+    ];
+
     /**
      * @var Executor
      */
@@ -281,6 +289,17 @@ class NetworkInterface
     }
 
     /**
+     * Returns true if the interface is an excluded interface.
+     *
+     * @param bool $interfaceName The interface name to check.
+     * @return boolean True if the interface is an excluded interface.
+     */
+    private static function isExcludedInterface($interfaceName)
+    {
+        return in_array($interfaceName, $this->excludedInterfaces);
+    }
+
+    /**
      * Returns the interface with the given name.
      *
      * @param string $interfaceName The interface name, example: eth0 or wlan0.
@@ -289,6 +308,10 @@ class NetworkInterface
      */
     public static function get($interfaceName, Executor $commandExecutor)
     {
+        if (NetworkInterface::isExcludedInterface($interfaceName)) {
+            throw new NetworkException('Interface "'.$interfaceName.'" is an excluded interface');
+        }
+
         return new NetworkInterface($interfaceName, $commandExecutor);
     }
 
@@ -306,7 +329,9 @@ class NetworkInterface
             $interfaces = array();
 
             foreach ($command->getOutput() as $interfaceName) {
-                $interfaces[] = NetworkInterface::get($interfaceName, $commandExecutor);
+                if (!NetworkInterface::isExcludedInterface($interfaceName)) {
+                    $interfaces[] = NetworkInterface::get($interfaceName, $commandExecutor);
+                }
             }
 
             return $interfaces;
