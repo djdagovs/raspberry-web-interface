@@ -4,6 +4,7 @@ namespace AppBundle\Wireless;
 
 class Network
 {
+    const OPEN = 'Open';
     const WEP = 'WEP';
     const WPA_PSK_TKIP = 'WPA-PSK (TKIP)';
     const WPA_PSK_AES = 'WPA-PSK (AES)';
@@ -198,7 +199,7 @@ class Network
      */
     private function hasFlag($flag)
     {
-        preg_match('/(?P<wep>\[WEP\])?(?P<wpa>\[WPA-(?P<wpa_tkip>PSK-(?P<wpa_aes>CCMP\+)?TKIP)?\])?(?P<wpa2>\[WPA2-(?P<wpa2_tkip>PSK-(?P<wpa2_aes>CCMP\+)?TKIP)?\])?(?P<wps>\[WPS\])?/i', $this->flags, $matches);
+        preg_match('/(?P<wep>\[WEP\])?(?P<wpa>\[WPA-PSK(?P<wpa_aes>-CCMP)?((\+|\-)(?P<wpa_tkip>TKIP))?\])?(?P<wpa2>\[WPA2-PSK(?P<wpa2_aes>-CCMP)?((\+|\-)(?P<wpa2_tkip>TKIP))?\])?(?P<wps>\[WPS\])?/i', $this->flags, $matches);
 
         return array_key_exists($flag, $matches) && !empty($matches[$flag]);
     }
@@ -275,6 +276,12 @@ class Network
                 $this->security = self::WPA2_PSK_TKIP;
                 return;
             }
+        }
+
+        // No security
+        if (!$this->hasFlags(['wep', 'wpa', 'wpa2'])) {
+            $this->security = self::OPEN;
+            return;
         }
     }
 }
