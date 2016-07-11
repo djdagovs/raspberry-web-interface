@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\Wireless;
+namespace AppBundle\Wireless\Scanner;
 
-class Network
+class Result
 {
     const OPEN = 'Open';
     const WEP = 'WEP';
@@ -48,16 +48,10 @@ class Network
      */
     private $wpsEnabled;
 
-    public function __construct($bssid, $frequency, $signalLevel, $flags, $ssid)
+    public function __construct($row)
     {
-        $this->bssid = $bssid;
-        $this->frequency = $frequency;
-        $this->signalLevel = $signalLevel;
-        $this->flags = $flags;
-        $this->ssid = $ssid;
-
-        // Analize flags
-        $this->populateFromFlags();
+        // Format row
+        $this->formatResultRow($row);
     }
 
     /**
@@ -223,11 +217,11 @@ class Network
     }
 
     /**
-     * Populates the network properties.
+     * Parses the network flags.
      *
      * @return void
      */
-    public function populateFromFlags()
+    public function parseFlags()
     {
         // WPS
         $this->wpsEnabled = $this->hasFlag('wps');
@@ -292,5 +286,25 @@ class Network
             $this->security = self::OPEN;
             return;
         }
+    }
+
+    /**
+     * Formats the given result row of the scanner.
+     *
+     * @param string $row A result row of the scanner.
+     * @return void
+     */
+    public function formatResultRow($row)
+    {
+        $row = preg_split('/[\t]+/', $row);
+
+        $this->bssid = $row[0];
+        $this->frequency = $row[1];
+        $this->signalLevel = $row[2];
+        $this->flags = $row[3];
+        $this->ssid = $row[4];
+
+        // Parse flags
+        $this->parseFlags();
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace AppBundle\Wireless;
+namespace AppBundle\Wireless\Scanner;
 
 use Psr\Log\LoggerInterface;
 use AppBundle\Command\Executor;
-use AppBundle\Wireless\Network;
+use AppBundle\Wireless\Scanner\Result;
 
 class Scanner
 {
@@ -52,14 +52,14 @@ class Scanner
      *
      * @return array The scan results.
      */
-    public function getNetworks()
+    public function getResults()
     {
         if ($this->scan()) {
             sleep(3);
         }
 
         $command = $this->commandExecutor->execute('wpa_cli scan_results');
-        $networks = array();
+        $results = array();
 
         if ($command->isValid()) {
             $output = $command->getOutput();
@@ -70,15 +70,13 @@ class Scanner
             }
 
             foreach ($output as $row) {
-                $networkRow = preg_split('/[\t]+/', $row);
-                $network = new Network($networkRow[0], $networkRow[1], $networkRow[2], $networkRow[3], $networkRow[4]);
-
-                $networks[] = $network->getDetails();
+                $result = new Result($row);
+                $results[] = $result->getDetails();
             }
 
             $this->logger->info('Found '.$command->getOutputCount().' networks.');
         }
 
-        return $networks;
+        return $results;
     }
 }
