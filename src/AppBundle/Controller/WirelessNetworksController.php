@@ -13,9 +13,11 @@ class WirelessNetworksController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $networkManager = $this->get('app.wireless.network_manager');
     	$scanner = $this->get('app.wireless.scanner');
 
         return $this->render('default/wireless-networks.html.twig', [
+            'saved_networks' => $networkManager->listNetworks(),
         	'networks' => $scanner->getResults(),
         ]);
     }

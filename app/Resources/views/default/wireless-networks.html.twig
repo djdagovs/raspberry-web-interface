@@ -3,11 +3,51 @@
 {% block title %}Wireless networks{% endblock %}
 
 {% block content %}
-    {% if networks %}
-        <section>
-            <div class="section-inner">
-                <h2>Networks</h2>
+    <section>
+        <div class="section-inner">
+            <h2>Saved networks</h2>
 
+            {% if saved_networks %}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Preferred BSSID</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                            {% for network in saved_networks %}
+                                <tr{{ network.status == 'Current' ? 'class="current"' : '' }}>
+                                    <td class="text-center"><i class="fa {{ network.status == 'Current' ? 'fa-circle' : 'fa-circle-o' }}" aria-hidden="true"></i></td>
+                                    <td>{{ network.ssid }}</td>
+                                    <td>{{ network.bssid }}</td>
+                                    <td>{{ network.status }}</td>
+                                    <td>
+                                        {% if network.status == 'Deactivated' %}
+                                            <a href="#" class="btn btn-warning btn-xs">Deactivate</a>
+                                        {% else %}
+                                            <a href="#" class="btn btn-primary btn-xs">Activate</a>
+                                        {% endif %}
+                                        <a href="#" class="btn btn-danger btn-xs">Remove</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="alert alert-danger">No saved networks found.</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <section>
+        <div class="section-inner">
+            <h2>Connect to a network</h2>
+
+            {% if networks %}
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <tbody>
@@ -36,13 +76,9 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </section>
-    {% else %}
-        <section>
-            <div class="section-inner">
+            {% else %}
                 <p class="alert alert-danger">No wireless networks found.</p>
-            </div>
-        </section>
-    {% endif %}
+            {% endif %}
+        </div>
+    </section>
 {% endblock %}
