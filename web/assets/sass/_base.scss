@@ -47,10 +47,10 @@ header {
 }
 
 section {
-	padding: 20px;
+	margin: 20px;
 
 	@include tablet {
-		padding: 30px;
+		margin: 30px;
 	}
 
 	.section-inner {
