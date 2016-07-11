@@ -31,6 +31,7 @@ class WirelessNetworksController extends Controller
     public function addAction(Request $request)
     {
         $networkManager = $this->get('app.wireless.network_manager');
+        $interface = $this->get('app.network.preferred_interface');
 
         $ssid = $request->request->get('ssid');
         $password = $request->request->get('password', null);
@@ -42,10 +43,16 @@ class WirelessNetworksController extends Controller
             $bssid = $request->request->get('bssid', null);
         }
 
-        if (!$networkManager->addNetwork($ssid, $password, $bssid, $keyManagement)) {
-            $this->addFlash('danger', sprintf('Network "%s" could not be added to your saved networks.', $ssid));
-        } else {
+        if ($networkManager->addNetwork($ssid, $password, $bssid, $keyManagement)) {
             $this->addFlash('success', sprintf('Network "%s" is now added to your saved networks.', $ssid));
+
+            if ($interface->restart()) {
+                $this->addFlash('success', sprintf('Interface "%s" succesfully restarted.', $interface->getName()));
+            } else {
+                $this->addFlash('warning', sprintf('Interface "%s" could not be restarted.', $interface->getName()));
+            }
+        } else {
+            $this->addFlash('danger', sprintf('Network "%s" could not be added to your saved networks.', $ssid));
         }
 
         return $this->redirectToRoute('wireless_networks');

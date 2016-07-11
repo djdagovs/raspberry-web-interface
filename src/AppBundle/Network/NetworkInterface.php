@@ -331,6 +331,46 @@ class NetworkInterface
     }
 
     /**
+     * Disables the interface.
+     *
+     * @return bool True if the interface is succesfully shutted down, false if not.
+     */
+    public function down()
+    {
+        $command = $this->commandExecutor->execute(sprintf('sudo ifdown %s', $this->name));
+
+        return $command->isValid();
+    }
+
+    /**
+     * Enables the interface.
+     *
+     * @return bool True if the interface is succesfully started, false if not.
+     */
+    public function up()
+    {
+        $command = $this->commandExecutor->execute(sprintf('sudo ifup %s', $this->name));
+
+        return $command->isValid();
+    }
+
+    /**
+     * Restarts the interface.
+     *
+     * @return bool True if the interface is succesfully restarted, false if not.
+     */
+    public function restart()
+    {
+        if ($this->down()) {
+            if ($this->up()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Returns true if the interface is an excluded interface.
      *
      * @param bool $interfaceName The interface name to check.
