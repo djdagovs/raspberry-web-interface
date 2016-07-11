@@ -53,6 +53,7 @@
                         <tbody>
                             <tr>
                                 <th></th>
+                                <th>#</th>
                                 <th>Name</th>
                                 <th>Channel</th>
                                 <th>Signal Level</th>
@@ -61,6 +62,7 @@
                             {% for network in networks %}
                                 <tr>
                                     <td class="text-center"><i class="fa {{ network.security == 'Open' ? 'fa-unlock' : 'fa-lock' }}" aria-hidden="true"></i></td>
+                                    <td>{{ network.id }}</td>
                                     <td>{{ network.ssid }}</td>
                                     <td>{{ network.channel }}</td>
                                     <td>
