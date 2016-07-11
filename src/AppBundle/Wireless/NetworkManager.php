@@ -92,7 +92,7 @@ class NetworkManager
         }
 
         // Create wpa_supplicant daemon and add network
-        $this->commandExecutor->execute(sprintf('wpa_cli wpa_supplicant -B -i %s -c %s', $this->interface->getName(), $this->configurationFile));
+        $this->commandExecutor->execute(sprintf('wpa_supplicant -B -i %s -c %s', $this->interface->getName(), $this->configurationFile));
         $command = $this->commandExecutor->execute(sprintf('wpa_cli -i %s add_network', $this->interface->getName()));
 
         if ($command->isValid()) {
