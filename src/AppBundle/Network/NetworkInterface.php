@@ -167,8 +167,8 @@ class NetworkInterface
             $this->populateInterfaceConfiguration();
         }
 
-        if (is_array($this->rxPacketsCount) && isset($this->rxPacketsCount[0])) {
-            return $this->rxPacketsCount[0];
+        if (is_array($this->rxPacketsCount) && isset($this->rxPacketsCount[1])) {
+            return $this->rxPacketsCount[1];
         }
 
         return null;
@@ -185,8 +185,8 @@ class NetworkInterface
             $this->populateInterfaceConfiguration();
         }
 
-        if (is_array($this->txPacketsCount) && isset($this->txPacketsCount[0])) {
-            return $this->txPacketsCount[0];
+        if (is_array($this->txPacketsCount) && isset($this->txPacketsCount[1])) {
+            return $this->txPacketsCount[1];
         }
 
         return null;
@@ -203,8 +203,8 @@ class NetworkInterface
             $this->populateInterfaceConfiguration();
         }
 
-        if (is_array($this->rxBytesCount) && isset($this->rxBytesCount[1])) {
-            return $this->rxBytesCount[1];
+        if (is_array($this->rxBytesCount) && isset($this->rxBytesCount[2])) {
+            return $this->rxBytesCount[2];
         }
 
         return null;
@@ -221,8 +221,8 @@ class NetworkInterface
             $this->populateInterfaceConfiguration();
         }
 
-        if (is_array($this->txBytesCount) && isset($this->txBytesCount[1])) {
-            return $this->txBytesCount[1];
+        if (is_array($this->txBytesCount) && isset($this->txBytesCount[2])) {
+            return $this->txBytesCount[2];
         }
 
         return null;
