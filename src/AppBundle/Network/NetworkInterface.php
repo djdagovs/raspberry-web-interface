@@ -282,6 +282,16 @@ class NetworkInterface
      */
     private function populateInterfaceConfiguration()
     {
+        $command = $this->commandExecutor->execute('cat /sys/class/net/'.$this->name.'/operstate');
+
+        if ($command->isValid()) {
+            $output = $command->getOutput();
+
+            if (isset($output[0])) {
+                $this->operationState = $output[0];
+            }
+        }
+
         $command = $this->commandExecutor->execute('/sbin/ifconfig '.$this->name);
 
         if ($command->isValid()) {
