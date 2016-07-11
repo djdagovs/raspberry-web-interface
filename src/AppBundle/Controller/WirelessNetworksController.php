@@ -30,6 +30,8 @@ class WirelessNetworksController extends Controller
      */
     public function addAction(Request $request)
     {
+        $networkManager = $this->get('app.wireless.network_manager');
+
         $ssid = $request->request->get('ssid');
         $password = $request->request->get('password', null);
         $enablePreferredBssid = $request->request->get('enable_preferred_bssid', false);
@@ -40,12 +42,73 @@ class WirelessNetworksController extends Controller
             $bssid = $request->request->get('bssid', null);
         }
 
-        $networkManager = $this->get('app.wireless.network_manager');
-
         if (!$networkManager->addNetwork($ssid, $password, $bssid, $keyManagement)) {
             $this->addFlash('danger', sprintf('Network "%s" could not be added to your saved networks.', $ssid));
         } else {
             $this->addFlash('success', sprintf('Network "%s" is now added to your saved networks.', $ssid));
+        }
+
+        return $this->redirectToRoute('wireless_networks');
+    }
+
+    /**
+     * @Route("/wireless-networks/enable", name="wireless_networks_enable")
+     * @Method("POST")
+     */
+    public function enableAction(Request $request)
+    {
+        $networkManager = $this->get('app.wireless.network_manager');
+
+        $id = $request->request->get('id', null);
+
+        if (!is_null($id) && !empty($id)) {
+            if ($networkManager->enableNetwork($id)) {
+                $this->addFlash('success', 'Network succesfully enabled.');
+            } else {
+                $this->addFlash('danger', 'Network could not be enabled.');
+            }
+        }
+
+        return $this->redirectToRoute('wireless_networks');
+    }
+
+    /**
+     * @Route("/wireless-networks/disable", name="wireless_networks_disable")
+     * @Method("POST")
+     */
+    public function disableAction(Request $request)
+    {
+        $networkManager = $this->get('app.wireless.network_manager');
+
+        $id = $request->request->get('id', null);
+
+        if (!is_null($id) && !empty($id)) {
+            if ($networkManager->disableNetwork($id)) {
+                $this->addFlash('success', 'Network succesfully disabled.');
+            } else {
+                $this->addFlash('danger', 'Network could not be disabled.');
+            }
+        }
+
+        return $this->redirectToRoute('wireless_networks');
+    }
+
+    /**
+     * @Route("/wireless-networks/remove", name="wireless_networks_remove")
+     * @Method("POST")
+     */
+    public function removeAction(Request $request)
+    {
+        $networkManager = $this->get('app.wireless.network_manager');
+
+        $id = $request->request->get('id', null);
+
+        if (!is_null($id) && !empty($id)) {
+            if ($networkManager->removeNetwork($id)) {
+                $this->addFlash('success', 'Network succesfully removed.');
+            } else {
+                $this->addFlash('danger', 'Network could not be removed.');
+            }
         }
 
         return $this->redirectToRoute('wireless_networks');

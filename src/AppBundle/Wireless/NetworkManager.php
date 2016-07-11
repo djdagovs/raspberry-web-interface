@@ -132,4 +132,43 @@ class NetworkManager
             return false;
         }
     }
+
+    /**
+     * Enables the network with the given ID.
+     *
+     * @param int $id The ID of the network to enable.
+     * @return bool True if the network was enabled, false if not.
+     */
+    public function enableNetwork($id)
+    {
+        $command = $this->commandExecutor->execute(sprintf('wpa_cli enable_network %d', $id));
+
+        return $command->isValid();
+    }
+
+    /**
+     * Disables the network with the given ID.
+     *
+     * @param int $id The ID of the network to disable.
+     * @return bool True if the network was disabled, false if not.
+     */
+    public function disableNetwork($id)
+    {
+        $command = $this->commandExecutor->execute(sprintf('wpa_cli disable_network %d', $id));
+
+        return $command->isValid();
+    }
+
+    /**
+     * Removes the network with the given ID.
+     *
+     * @param int $id The ID of the network to remove.
+     * @return bool True if the network was removed, false if not.
+     */
+    public function removeNetwork($id)
+    {
+        $command = $this->commandExecutor->execute(sprintf('wpa_cli remove_network %d', $id));
+
+        return $command->isValid();
+    }
 }

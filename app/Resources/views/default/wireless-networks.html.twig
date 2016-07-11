@@ -17,6 +17,7 @@
                                 <th>Preferred BSSID</th>
                                 <th>Status</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                             {% for network in saved_networks %}
                                 <tr{{ network.current ? ' class="current"' : '' }}>
@@ -26,11 +27,22 @@
                                     <td>{{ network.status }}</td>
                                     <td>
                                         {% if network.status == 'Disabled' %}
-                                            <a href="#" class="btn btn-primary btn-xs">Enable</a>
+                                            <form action="{{ url('wireless_networks_enable') }}" method="post">
+                                                <input type="hidden" name="id" value="{{ network.id }}">
+                                                <button type="submit" class="btn btn-success btn-xs">Enable</button>
+                                            </form>
                                         {% else %}
-                                            <a href="#" class="btn btn-warning btn-xs">Disable</a>
+                                            <form action="{{ url('wireless_networks_disable') }}" method="post">
+                                                <input type="hidden" name="id" value="{{ network.id }}">
+                                                <button type="submit" class="btn btn-warning btn-xs">Disable</button>
+                                            </form>
                                         {% endif %}
-                                        <a href="#" class="btn btn-danger btn-xs">Remove</a>
+                                    </td>
+                                    <td>
+                                        <form action="{{ url('wireless_networks_remove') }}" method="post">
+                                            <input type="hidden" name="id" value="{{ network.id }}">
+                                            <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash" aria-hidden="true"></i> Remove</button>
+                                        </form>
                                     </td>
                                 </tr>
                             {% endfor %}
