@@ -75,4 +75,56 @@ class NetworkManager
 
         return $networks;
     }
+
+    /**
+     * Adds the given network to the configuration file.
+     *
+     * @param string $ssid The SSID of the network to add.
+     * @param string $password The password of the network to add, null for open networks or other networks.
+     * @param string $preferredBssid The preferred BSSID to connect with, null for any.
+     * @param string $keyManagement The key management type to use, default WPA-PSK.
+     */
+    public function addNetwork($ssid, $password = null, $preferredBssid = null, $keyManagement = 'WPA-PSK')
+    {
+        // Set default key management if there is no key management method set.
+        if (!is_null($password) && (is_null($keyManagement) || empty($keyManagement))) {
+            $keyManagement = 'WPA-PSK';
+        }
+
+        // Create wpa_supplicant daemon and add network
+        $this->commandExecutor->execute(sprintf('wpa_cli wpa_supplicant -B -i %s -c %s', $this->interface->getName(), $this->configurationFile));
+        $command = $this->commandExecutor->execute(sprintf('wpa_cli -i %s add_network', $this->interface->getName()));
+
+        if ($command->isValid()) {
+            if ($networkId = $command->getOutput[0]) {
+                $this->commandExecutor->execute(sprintf('wpa_cli set_network %i ssid "%s"', $networkId, $ssid));
+
+                if (is_null($password)) {
+                    // Add network without PSK, set key management to none.
+                    $this->commandExecutor->execute(sprintf('wpa_cli set_network %i key_mgmt NONE', $networkId));
+                } else {
+                    // Add network with PSK and set key management.
+                    $this->commandExecutor->execute(sprintf('wpa_cli set_network %i key_mgmt %s', $networkId, $keyManagement));
+                }
+
+                // Set preferred BSSID if not null
+                if (!is_null($preferredBssid)) {
+                    $command = $this->commandExecutor->execute(sprintf('wpa_cli bssid %i %s', $networkId, $preferredBssid));
+                }
+
+                $command = $this->commandExecutor->execute(sprintf('wpa_cli enable_network %i', $networkId));
+            }
+        }
+
+        // Check if the network is added
+        if ($command->isValid()) {
+            $this->logger->info(sprintf('Succesfully added "%s" to the WPA supplicant configuration file.', $ssid), $command->getOutput());
+
+            return true;
+        } else {
+            $this->logger->error(sprintf('Could not add "%s" to the WPA supplicant configuration file.', $ssid), $command->getOutput());
+
+            return false;
+        }
+    }
 }
