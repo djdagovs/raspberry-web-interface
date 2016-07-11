@@ -44,7 +44,7 @@ class NetworkManager
      */
     public function setConfigurationFile($configurationFile)
     {
-        if (!file_exists($configurationFile) || !is_readable($configurationFile)) {
+        if (!file_exists($configurationFile)) {
             throw new FileNotReadableException('The configuration file "'.$configurationFile.'" does not exist, or isn\'t readable.');
         }
 
@@ -65,7 +65,7 @@ class NetworkManager
             $output = $command->getOutput();
 
             // Remove comment rows
-            for ($i = 0; $i < 2; $i++) {
+            for ($i = 0; $i < 1; $i++) {
                 array_shift($output);
             }
 
