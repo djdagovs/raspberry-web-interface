@@ -167,6 +167,10 @@ class NetworkInterface
             $this->populateInterfaceConfiguration();
         }
 
+        if (is_array($this->rxPacketsCount) && isset($this->rxPacketsCount[0])) {
+            return $this->rxPacketsCount[0];
+        }
+
         return null;
     }
 
@@ -179,6 +183,10 @@ class NetworkInterface
     {
         if (is_null($this->txPacketsCount)) {
             $this->populateInterfaceConfiguration();
+        }
+
+        if (is_array($this->txPacketsCount) && isset($this->txPacketsCount[0])) {
+            return $this->txPacketsCount[0];
         }
 
         return null;
@@ -195,6 +203,10 @@ class NetworkInterface
             $this->populateInterfaceConfiguration();
         }
 
+        if (is_array($this->rxBytesCount) && isset($this->rxBytesCount[1])) {
+            return $this->rxBytesCount[1];
+        }
+
         return null;
     }
 
@@ -207,6 +219,10 @@ class NetworkInterface
     {
         if (is_null($this->txBytesCount)) {
             $this->populateInterfaceConfiguration();
+        }
+
+        if (is_array($this->txBytesCount) && isset($this->txBytesCount[1])) {
+            return $this->txBytesCount[1];
         }
 
         return null;
