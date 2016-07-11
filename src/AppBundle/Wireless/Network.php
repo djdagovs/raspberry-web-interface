@@ -162,12 +162,12 @@ class Network
             $this->status = Network::STATUS_CURRENT;
         }
 
-        if ($this->hasFlag('enabled')) {
-            $this->status = Network::STATUS_ENABLED;
-        }
-
         if ($this->hasFlag('disabled')) {
             $this->status = Network::STATUS_DISABLED;
+        }
+
+        if (!$this->hasFlag('current') && !$this->hasFlag('disabled')) {
+            $this->status = Network::STATUS_ENABLED;
         }
     }
 
