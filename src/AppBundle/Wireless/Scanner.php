@@ -27,7 +27,7 @@ class Scanner
     /**
      * Scans wireless networks.
      *
-     * @return void
+     * @return bool True if the scan succeeded, false if not.
      */
     public function scan()
     {
@@ -40,7 +40,11 @@ class Scanner
             $selectedInterface = isset($result[0]) ? $result[0] : 'Unknown';
 
             $this->logger->info('Scanning networks... Selected interface: '.$selectedInterface);
+
+            return true;
         }
+
+        return false;
     }
 
     /**
@@ -50,8 +54,10 @@ class Scanner
      */
     public function getNetworks()
     {
-        $this->scan();
-        sleep(3);
+        if ($this->scan()) {
+            sleep(3);
+        }
+
         $command = $this->commandExecutor->execute('wpa_cli scan_results');
         $networks = array();
 
