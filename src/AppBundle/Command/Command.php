@@ -55,26 +55,29 @@ class Command
 	/**
 	 * Returns the output of the executed command.
 	 *
-	 * @throws CommandNotExecutedException if the command is not yet executed.
+	 * @param $offset int The array output offset.
 	 * @return array The output of the executed command.
+	 * @throws CommandNotExecutedException if the command is not yet executed.
 	 */
-	public function getOutput()
+	public function getOutput($offset = 0)
 	{
 		if (is_null($this->output)) {
 			throw new CommandNotExecutedException('Please execute the command first before retrieving the output.');
 		}
 
-		return $this->output;
+		return array_slice($this->output, $offset);
 	}
 
 	/**
 	 * Returns the number of output rows of the executed command.
 	 *
+	 * @param $offset int The array output offset.
 	 * @return int The number of output rows of the executed command.
+	 * @throws CommandNotExecutedException if the command is not yet executed.
 	 */
-	public function getOutputCount()
+	public function getOutputCount($offset = 0)
 	{
-		return count($this->getOutput());
+		return count($this->getOutput($offset));
 	}
 
 	/**
