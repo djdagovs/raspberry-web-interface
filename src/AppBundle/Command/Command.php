@@ -56,28 +56,30 @@ class Command
 	 * Returns the output of the executed command.
 	 *
 	 * @param $offset int The array output offset.
+	 * @param $length int The max length of the output array, null for unlimited.
 	 * @return array The output of the executed command.
 	 * @throws CommandNotExecutedException if the command is not yet executed.
 	 */
-	public function getOutput($offset = 0)
+	public function getOutput($offset = 0, $length = null)
 	{
 		if (is_null($this->output)) {
 			throw new CommandNotExecutedException('Please execute the command first before retrieving the output.');
 		}
 
-		return array_slice($this->output, $offset);
+		return array_slice($this->output, $offset, $length);
 	}
 
 	/**
 	 * Returns the number of output rows of the executed command.
 	 *
 	 * @param $offset int The array output offset.
+	 * @param $length int The max length of the output array, null for unlimited.
 	 * @return int The number of output rows of the executed command.
 	 * @throws CommandNotExecutedException if the command is not yet executed.
 	 */
-	public function getOutputCount($offset = 0)
+	public function getOutputCount($offset = 0, $length = null)
 	{
-		return count($this->getOutput($offset));
+		return count($this->getOutput($offset, $length));
 	}
 
 	/**
