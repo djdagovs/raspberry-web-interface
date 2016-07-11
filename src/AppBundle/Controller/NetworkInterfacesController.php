@@ -25,6 +25,8 @@ class NetworkInterfacesController extends Controller
                     'ip' => $interface->getIpAddress(),
                     'mac_address' => $interface->getMacAddress(),
                     'netmask' => $interface->getNetmask(),
+                    'bytes_received' => $interface->getRxBytesCount(),
+                    'bytes_sent' => $interface->getTxBytesCount(),
                     'wireless_connection' => $interface->getWirelessConnectionDetails(),
                 ];
             }

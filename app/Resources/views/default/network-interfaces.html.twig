@@ -40,12 +40,12 @@
                                 <table class="table table-striped">
                                     <tbody>
                                         <tr>
-                                            <td>Default gateway</td>
-                                            <td>-</td>
+                                            <td>Bytes received</td>
+                                            <td>{{ interface.bytes_received }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Subnet Mask</td>
-                                            <td>{{ interface.netmask ? interface.netmask : 'Unknown' }}</td>
+                                            <td>Bytes sent</td>
+                                            <td>{{ interface.bytes_sent }}</td>
                                         </tr>
                                         {% if interface.wireless_connection != null %}
                                             <tr>
