@@ -102,7 +102,7 @@ class NetworkManager
 
             if (isset($output[0])) {
                 $networkId = $output[0];
-                $this->commandExecutor->execute(sprintf('wpa_cli set_network %d ssid "%s"', $networkId, $ssid));
+                $this->commandExecutor->execute(sprintf('wpa_cli set_network %d ssid \'"%s"\'', $networkId, $ssid));
 
                 if (is_null($password)) {
                     // Add network without PSK, set key management to none.
