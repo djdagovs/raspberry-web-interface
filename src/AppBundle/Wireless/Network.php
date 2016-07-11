@@ -11,6 +11,7 @@ class Network
     const WPA2_PSK_TKIP = 'WPA2-PSK (TKIP)';
     const WPA2_PSK_AES = 'WPA2-PSK (AES)';
     const WPA_WPA2_PSK_TKIP_AES = 'WPA/WPA2-PSK (TKIP/AES)';
+    const WPA2_EAP_AES = 'WPA2-EAP (AES)';
 
     /**
      * @var string
@@ -199,7 +200,7 @@ class Network
      */
     private function hasFlag($flag)
     {
-        preg_match('/(?P<wep>\[WEP\])?(?P<wpa>\[WPA-PSK(?P<wpa_aes>-CCMP)?((\+|\-)(?P<wpa_tkip>TKIP))?\])?(?P<wpa2>\[WPA2-PSK(?P<wpa2_aes>-CCMP)?((\+|\-)(?P<wpa2_tkip>TKIP))?\])?(?P<wps>\[WPS\])?/i', $this->flags, $matches);
+        preg_match('/(?P<wep>\[WEP\])?(?P<wpa_psk>\[WPA-PSK(?P<wpa_psk_aes>-CCMP)?((\+|\-)(?P<wpa_psk_tkip>TKIP))?\])?(?P<wpa2_psk>\[WPA2-PSK(?P<wpa2_psk_aes>-CCMP)?((\+|\-)(?P<wpa2_psk_tkip>TKIP))?\])?(?P<wpa2_eap>\[WPA2-EAP(?P<wpa2_eap_aes>-CCMP)?\])?(?P<wps>\[WPS\])?/i', $this->flags, $matches);
 
         return array_key_exists($flag, $matches) && !empty($matches[$flag]);
     }
@@ -240,46 +241,54 @@ class Network
 
         // WPA/WPA2-PSK (TKIP/AES)
         if (
-            $this->hasFlags(['wpa', 'wpa2']) &&
-            ($this->hasFlag('wpa_tkip') || $this->hasFlag('wpa_aes')) &&
-            ($this->hasFlag('wpa2_tkip') || $this->hasFlag('wpa2_aes'))
+            $this->hasFlags(['wpa_psk', 'wpa2_psk']) &&
+            ($this->hasFlag('wpa_psk_tkip') || $this->hasFlag('wpa_psk_aes')) &&
+            ($this->hasFlag('wpa2_psk_tkip') || $this->hasFlag('wpa2_psk_aes'))
         ) {
             $this->security = self::WPA_WPA2_PSK_TKIP_AES;
             return;
         }
 
-        // WPA
-        if ($this->hasFlag('wpa') && !$this->hasFlag('wpa2')) {
+        // WPA-PSK
+        if ($this->hasFlag('wpa_psk') && !$this->hasFlag('wpa2_psk')) {
             // WPA-PSK-AES
-            if ($this->hasFlag('wpa_aes')) {
+            if ($this->hasFlag('wpa_psk_aes')) {
                 $this->security = self::WPA_PSK_AES;
                 return;
             }
 
             // WPA-PSK-TKIP
-            if ($this->hasFlag('wpa_tkip')) {
+            if ($this->hasFlag('wpa_psk_tkip')) {
                 $this->security = self::WPA_PSK_TKIP;
                 return;
             }
         }
 
-        // WPA2
-        if (!$this->hasFlag('wpa') && $this->hasFlag('wpa2')) {
+        // WPA2-PSK
+        if (!$this->hasFlag('wpa_psk') && $this->hasFlag('wpa2_psk')) {
             // WPA2-PSK-AES
-            if ($this->hasFlag('wpa2_aes')) {
+            if ($this->hasFlag('wpa2_psk_aes')) {
                 $this->security = self::WPA2_PSK_AES;
                 return;
             }
 
             // WPA2-PSK-TKIP
-            if ($this->hasFlag('wpa2_tkip')) {
+            if ($this->hasFlag('wpa2_psk_tkip')) {
                 $this->security = self::WPA2_PSK_TKIP;
                 return;
             }
         }
 
+        // WPA2-EAP
+        if ($this->hasFlag('wpa2_eap')) {
+            if ($this->hasFlag('wpa2_eap_aes')) {
+                $this->security = self::WPA2_EAP_AES;
+                return;
+            }
+        }
+
         // No security
-        if (!$this->hasFlags(['wep', 'wpa', 'wpa2'])) {
+        if (!$this->hasFlags(['wep', 'wpa_psk', 'wpa2_psk', 'wpa2_eap'])) {
             $this->security = self::OPEN;
             return;
         }
