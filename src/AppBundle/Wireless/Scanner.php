@@ -37,9 +37,9 @@ class Scanner
             $output = implode(' ', $command->getOutput());
             preg_match('/Selected interface \'([a-z0-9]+)\'/i', $output, $result);
 
-            $selectedInterface = isset($result[0]) ? $result[0] : 'Unknown';
+            $selectedInterface = isset($result[1]) ? $result[1] : 'Unknown';
 
-            $this->logger->info('Scanning networks... Selected interface: '.$selectedInterface);
+            $this->logger->info('Scanning networks... Selected interface: "'.$selectedInterface.'"');
 
             return true;
         }
