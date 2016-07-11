@@ -32,6 +32,15 @@ table {
 			}
 		}
 	}
+
+	> tbody {
+		> tr {
+			&.current {
+				font-weight: 600;
+				color: $green-color;
+			}
+		}
+	}
 }
 
 header {
