@@ -97,10 +97,10 @@ class NetworkInterface
     public function getOperationState()
     {
         $operationStates = [
-            'up' => ['Running', 'success'],
+            'up' => ['Up and running!', 'success'],
             'dormant' => ['Waiting...', 'warning'],
             'notPresent' => ['Not present', 'warning'],
-            'down' => ['Interface is down', 'danger'],
+            'down' => ['Not running', 'danger'],
         ];
 
         if (is_null($this->operationState)) {
