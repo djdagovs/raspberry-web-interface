@@ -125,7 +125,7 @@ class NetworkInterface
             $this->populateInterfaceConfiguration();
         }
 
-        return null;
+        return $this->macAddress;
     }
 
     /**
@@ -139,7 +139,7 @@ class NetworkInterface
             $this->populateInterfaceConfiguration();
         }
 
-        return null;
+        return $this->ipAddress;
     }
 
     /**
@@ -153,7 +153,7 @@ class NetworkInterface
             $this->populateInterfaceConfiguration();
         }
 
-        return null;
+        return $this->netmask;
     }
 
     /**
