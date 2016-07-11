@@ -13,20 +13,24 @@
                         <table class="table table-striped">
                             <tbody>
                                 <tr>
-                                    <td>Interface status</td>
-                                    <td><span class="label label-{{ interface.operation_state ? interface.operation_state.0 : 'default' }}">{{ interface.operation_state ? interface.operation_state.0 : 'Unknown' }}</span></td>
+                                    <td>Interface status ({{ interface.name }})</td>
+                                    <td><span class="label label-{{ interface.operation_state ? interface.operation_state.1 : 'default' }}">{{ interface.operation_state ? interface.operation_state.0 : 'Unknown' }}</span></td>
                                 </tr>
                                 <tr>
-                                    <td>Connection type</td>
-                                    <td>-</td>
+                                    <td>MAC address</td>
+                                    <td>{{ interface.mac_address ? interface.mac_address : 'Unknown' }}</td>
                                 </tr>
                                 <tr>
                                     <td>IP address</td>
                                     <td>{{ interface.ip ? interface.ip : 'Unknown' }}</td>
                                 </tr>
                                 <tr>
-                                    <td>MAC address</td>
-                                    <td>{{ interface.mac_address ? interface.mac_address : 'Unknown' }}</td>
+                                    <td>Default gateway</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>Netmask</td>
+                                    <td>{{ interface.netmask ? interface.netmask : 'Unknown' }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -38,19 +42,37 @@
                         <table class="table table-striped">
                             <tbody>
                                 <tr>
-                                    <td>Default gateway</td>
-                                    <td>-</td>
+                                    <td>Bytes received</td>
+                                    <td>{{ interface.bytes_received }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Subnet Mask</td>
-                                    <td>{{ interface.netmask ? interface.netmask : 'Unknown' }}</td>
+                                    <td>Bytes sent</td>
+                                    <td>{{ interface.bytes_sent }}</td>
                                 </tr>
+                                {% if interface.wireless_connection != null %}
+                                    <tr>
+                                        <td>Link Quality</td>
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{ interface.wireless_connection.link_quality }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ interface.wireless_connection.link_quality }}%">
+                                                    {{ interface.wireless_connection.link_quality }}%
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Signal Level</td>
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{ interface.wireless_connection.signal_level }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ interface.wireless_connection.signal_level }}%">
+                                                    {{ interface.wireless_connection.signal_level }}%
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endif %}
                                 <tr>
-                                    <td>Primary DNS server</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>Secondary DNS server</td>
+                                    <td>DNS servers</td>
                                     <td>-</td>
                                 </tr>
                             </tbody>
