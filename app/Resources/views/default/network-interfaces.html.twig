@@ -19,16 +19,16 @@
                                             <td><span class="label label-{{ interface.operation_state ? interface.operation_state.1 : 'default' }}">{{ interface.operation_state ? interface.operation_state.0 : 'Unknown' }}</span></td>
                                         </tr>
                                         <tr>
-                                            <td>Connection type</td>
-                                            <td>-</td>
+                                            <td>MAC address</td>
+                                            <td>{{ interface.mac_address ? interface.mac_address : 'Unknown' }}</td>
                                         </tr>
                                         <tr>
                                             <td>IP address</td>
                                             <td>{{ interface.ip ? interface.ip : 'Unknown' }}</td>
                                         </tr>
                                         <tr>
-                                            <td>MAC address</td>
-                                            <td>{{ interface.mac_address ? interface.mac_address : 'Unknown' }}</td>
+                                            <td>Netmask</td>
+                                            <td>{{ interface.netmask ? interface.netmask : 'Unknown' }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
