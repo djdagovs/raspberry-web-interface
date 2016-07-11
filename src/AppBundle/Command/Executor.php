@@ -39,7 +39,11 @@ class Executor
 
         $command->execute($this->pretend);
 
-        $this->logger->info('Executed command: '.$command->getCommand().'. Return status: '.$command->getReturnStatus());
+        if ($command->isValid()) {
+            $this->logger->info('Executed command: "'.$command->getCommand().'". (Status: '.$command->getReturnStatus().')', $command->getOutput());
+        } else {
+            $this->logger->error('Failed to execute command: "'.$command->getCommand().'". (Status: '.$command->getReturnStatus().')', $command->getOutput());
+        }
 
         return $command;
     }
