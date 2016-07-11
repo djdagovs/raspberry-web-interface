@@ -138,7 +138,7 @@ class NetworkInterfaceWirelessConnection
         $networkLinkQuality = $this->getNetworkLinkQuality();
 
         if (!is_null($networkLinkQuality)) {
-            return ($networkLinkQuality[1] / $networkLinkQuality[2]) * 100;
+            return round(($networkLinkQuality[1] / $networkLinkQuality[2]) * 100);
         }
 
         return null;
@@ -174,7 +174,7 @@ class NetworkInterfaceWirelessConnection
             } elseif ($networkSignalLevel > -50) {
                 return 100;
             } else {
-                return 2 * ($networkSignalLevel + 100);
+                return round(2 * ($networkSignalLevel + 100));
             }
         }
 
