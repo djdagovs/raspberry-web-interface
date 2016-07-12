@@ -18,9 +18,11 @@ a {
 	transition: background .2s linear, color .2s linear;
 }
 
-table {
+.table-responsive {
 	&:last-child {
-		margin-bottom: 0;
+		table {
+			margin-bottom: 0;
+		}
 	}
 }
 
