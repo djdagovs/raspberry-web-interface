@@ -59,6 +59,14 @@
                     </div>
                 </div>
 
+                {% for type, flashes in app.session.flashbag.all %}
+                    {% for flash in flashes %}
+                        <div class="flash-message flash-message-{{ type }} animated fadeIn">
+                            {{ flash }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
                 {% block content %}{% endblock %}
             </main>
         </div>
