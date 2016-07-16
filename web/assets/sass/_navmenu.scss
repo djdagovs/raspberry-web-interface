@@ -6,14 +6,18 @@
 	margin-top: $navmenu-margin-vertical;
 
 	> li {
-		> a {
-			> i {
-				margin-right: 5px;
+		&.active {
+			> a {
+				border-left-color: $primary-color;
 			}
 		}
 
-		&.active {
-			border-left: 3px solid $primary-color;
+		> a {
+			border-left: 3px solid transparent;
+
+			> i {
+				margin-right: 5px;
+			}
 		}
 	}
 }
