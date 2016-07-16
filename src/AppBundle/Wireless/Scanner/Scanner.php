@@ -48,11 +48,8 @@ class Scanner
 
         if ($command->isValid()) {
             $output = implode(' ', $command->getOutput());
-            preg_match('/Selected interface \'([a-z0-9]+)\'/i', $output, $result);
 
-            $selectedInterface = isset($result[1]) ? $result[1] : 'Unknown';
-
-            $this->logger->info('Scanning networks... Selected interface: "'.$selectedInterface.'"');
+            $this->logger->info('Scanning networks...');
 
             return true;
         }
@@ -89,7 +86,7 @@ class Scanner
                     $this->logger->info(sprintf('Found %d networks, continuing.', $count));
                     continue;
                 } else {
-                    $this->logger->info(sprintf('Found %d networks, trying again...', $count));
+                    $this->logger->info(sprintf('Found %d network(s), trying again...', $count));
                 }
             }
         }
