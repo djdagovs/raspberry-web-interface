@@ -8,19 +8,19 @@
             <section>
                 <div class="section-inner">
                     <div class="section-heading row">
-                        <div class="col-md-8">
+                        <div class="col-xs-7">
                             <h2>Interface: {{ interface.name }}</h2>
                         </div>
-                        <div class="col-md-4 text-right">
+                        <div class="col-xs-5 text-right">
                             {% if interface.operation_state and interface.operation_state.0 == 'Not running' %}
                                 <form action="{{ url('network_interfaces_enable') }}" method="post">
                                     <input type="hidden" name="name" value="{{ interface.name }}">
-                                    <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-toggle-on" aria-hidden="true"></i> Enable interface</button>
+                                    <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-toggle-on" aria-hidden="true"></i> Enable<span class="hidden-xs"> interface</span></button>
                                 </form>
                             {% else %}
                                 <form action="{{ url('network_interfaces_disable') }}" method="post">
                                     <input type="hidden" name="name" value="{{ interface.name }}">
-                                    <button type="submit" class="btn btn-warning btn-sm"><i class="fa fa-toggle-off" aria-hidden="true"></i> Disable interface</button>
+                                    <button type="submit" class="btn btn-warning btn-sm"><i class="fa fa-toggle-off" aria-hidden="true"></i> Disable<span class="hidden-xs"> interface</span></button>
                                 </form>
                             {% endif %}
                         </div>
