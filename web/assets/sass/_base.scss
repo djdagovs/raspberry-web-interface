@@ -58,7 +58,8 @@ header {
 }
 
 section {
-	margin: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 
 	@include tablet {
 		margin: 30px;
@@ -67,11 +68,14 @@ section {
 	.section-inner {
 		background: #FFF;
 		padding: 20px;
-		border: 1px solid $content-border-color;
-		border-radius: $border-radius-base;
+		border-top: 1px solid $content-border-color;
+		border-bottom: 1px solid $content-border-color;
 
 		@include tablet {
 			padding: 30px;
+			border-left: 1px solid $content-border-color;
+			border-right: 1px solid $content-border-color;
+			border-radius: $border-radius-base;
 		}
 	}
 }
