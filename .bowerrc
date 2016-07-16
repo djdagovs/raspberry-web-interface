@@ -1,5 +1,4 @@
-    {
-    "directory": "web/bower_components/",
+{
     "ignoredDependencies": [
         "bootstrap"
     ]
