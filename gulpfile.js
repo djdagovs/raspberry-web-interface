@@ -13,6 +13,11 @@ var stylesheets = [
     'web/assets/css/**/*.css'
 ];
 
+var fonts = [
+    'web/bower_components/bootstrap-sass/assets/fonts/bootstrap/*',
+    'web/bower_components/font-awesome/fonts/*'
+];
+
 var scripts = {
     app: [
         'web/assets/js/**/*.js',
@@ -44,6 +49,11 @@ gulp.task('css', ['sass'], function() {
     return gulp.src(stylesheets)
         .pipe(concat('app.min.css'))
         .pipe(gulp.dest('web/build/css'));
+});
+
+gulp.task('fonts', function() {
+    return gulp.src(fonts)
+        .pipe(gulp.dest('web/build/fonts/'));
 });
 
 gulp.task('scripts_app', function() {
@@ -83,6 +93,6 @@ gulp.task('watch', function() {
     gulp.watch('web/assets/js/*.js', ['scripts_app']);
 });
 
-gulp.task('vendor', ['scripts_vendor'])
+gulp.task('build', ['css', 'fonts', 'scripts_app', 'scripts_vendor']);
 
 gulp.task('default', ['watch']);
