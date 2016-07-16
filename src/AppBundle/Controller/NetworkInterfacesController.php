@@ -6,11 +6,13 @@ use AppBundle\Network\NetworkInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class NetworkInterfacesController extends Controller
 {
     /**
      * @Route("/network-interfaces", name="network_interfaces")
+     * @Method("GET")
      */
     public function indexAction(Request $request)
     {
@@ -35,5 +37,47 @@ class NetworkInterfacesController extends Controller
         return $this->render('default/network-interfaces.html.twig', [
             'interfaces' => $data
         ]);
+    }
+
+       /**
+     * @Route("/network-interfaces/enable", name="network_interfaces_enable")
+     * @Method("POST")
+     */
+    public function enableAction(Request $request)
+    {
+        $name = $request->request->get('name', null);
+
+        if (!is_null($name) && ctype_alnum($name)) {
+            $interface = NetworkInterface::get($name, $this->get('app.command.executor'));
+
+            if ($interface->up()) {
+                $this->addFlash('success', 'Interface succesfully enabled.');
+            } else {
+                $this->addFlash('danger', 'Interface could not be enabled.');
+            }
+        }
+
+        return $this->redirectToRoute('network_interfaces');
+    }
+
+    /**
+     * @Route("/network-interfaces/disable", name="network_interfaces_disable")
+     * @Method("POST")
+     */
+    public function disableAction(Request $request)
+    {
+        $name = $request->request->get('name', null);
+
+        if (!is_null($name) && ctype_alnum($name)) {
+            $interface = NetworkInterface::get($name, $this->get('app.command.executor'));
+
+            if ($interface->down()) {
+                $this->addFlash('success', 'Interface succesfully disabled.');
+            } else {
+                $this->addFlash('danger', 'Interface could not be disabled.');
+            }
+        }
+
+        return $this->redirectToRoute('network_interfaces');
     }
 }
