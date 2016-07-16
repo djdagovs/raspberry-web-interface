@@ -51,9 +51,9 @@ class NetworkInterfacesController extends Controller
             $interface = NetworkInterface::get($name, $this->get('app.command.executor'));
 
             if ($interface->up()) {
-                $this->addFlash('success', 'Interface succesfully enabled.');
+                $this->addFlash('success', sprintf('Interface "%s" succesfully enabled.', $name));
             } else {
-                $this->addFlash('danger', 'Interface could not be enabled.');
+                $this->addFlash('danger', sprintf('Interface "%s" could not be enabled.', $name));
             }
         }
 
@@ -72,9 +72,9 @@ class NetworkInterfacesController extends Controller
             $interface = NetworkInterface::get($name, $this->get('app.command.executor'));
 
             if ($interface->down()) {
-                $this->addFlash('success', 'Interface succesfully disabled.');
+                $this->addFlash('success', sprintf('Interface "%s" succesfully disabled.', $name));
             } else {
-                $this->addFlash('danger', 'Interface could not be disabled.');
+                $this->addFlash('danger', sprintf('Interface "%s" could not be disabled.', $name));
             }
         }
 
