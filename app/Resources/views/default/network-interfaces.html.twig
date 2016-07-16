@@ -7,11 +7,11 @@
         {% for interface in interfaces %}
             <section>
                 <div class="section-inner">
-                    <div class="secton-heading row">
+                    <div class="section-heading row">
                         <div class="col-md-8">
                             <h2>Interface: {{ interface.name }}</h2>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 text-right">
                             {% if interface.operation_state and interface.operation_state.0 == 'Not running' %}
                                 <form action="{{ url('network_interfaces_enable') }}" method="post">
                                     <input type="hidden" name="name" value="{{ interface.name }}">
@@ -20,7 +20,7 @@
                             {% else %}
                                 <form action="{{ url('network_interfaces_disable') }}" method="post">
                                     <input type="hidden" name="name" value="{{ interface.name }}">
-                                    <button type="submit" class="btn btn-warning btn-xs">Disable</button>
+                                    <button type="submit" class="btn btn-warning btn-sm">Disable</button>
                                 </form>
                             {% endif %}
                         </div>
