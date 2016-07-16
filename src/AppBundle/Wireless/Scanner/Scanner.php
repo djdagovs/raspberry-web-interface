@@ -84,7 +84,7 @@ class Scanner
                 // If more than one network is found during an iteration, continue.
                 if ($count > 1) {
                     $this->logger->info(sprintf('Found %d networks, continuing.', $count));
-                    continue;
+                    break;
                 } else {
                     $this->logger->info(sprintf('Found %d network(s), trying again...', $count));
                 }
