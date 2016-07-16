@@ -2,8 +2,6 @@
     font-weight: 600;
     color: #FFF;
     padding: 20px;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
 
     @include tablet {
         padding-left: 30px;
@@ -12,16 +10,13 @@
 }
 
 .flash-message-success {
-    background-color: $green-color;
-    border-color: $green-dark-color;
+    background-color: $brand-success;
 }
 
 .flash-message-notice {
-    background-color: $blue-color;
-    border-color: $blue-dark-color;
+    background-color: $brand-info;
 }
 
 .flash-message-error {
-    background-color: $red-color;
-    border-color: $red-dark-color;
+    background-color: $brand-danger;
 }

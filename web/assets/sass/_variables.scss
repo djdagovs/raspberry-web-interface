@@ -17,27 +17,6 @@ $gray-lightest-color: lighten($gray-light-color, 15%);
 $gray-dark-color:     darken($gray-color, 1%);
 $gray-darker-color:   darken($gray-color, 5%);
 
-$green-color:          #359504;
-$green-light-color:    lighten($green-color, 5%);
-$green-lighter-color:  lighten($green-color, 10%);
-$green-lightest-color: lighten($green-color, 15%);
-$green-dark-color:     darken($green-color, 10%);
-$green-darker-color:   darken($green-color, 15%);
-
-$red-color:          $primary-color;
-$red-light-color:    lighten($red-color, 5%);
-$red-lighter-color:  lighten($red-color, 10%);
-$red-lightest-color: lighten($red-color, 15%);
-$red-dark-color:     darken($red-color, 10%);
-$red-darker-color:   darken($red-color, 15%);
-
-$blue-color:          #0577c7;
-$blue-light-color:    lighten($blue-color, 5%);
-$blue-lighter-color:  lighten($blue-color, 10%);
-$blue-lightest-color: lighten($blue-color, 15%);
-$blue-dark-color:     darken($blue-color, 10%);
-$blue-darker-color:   darken($blue-color, 15%);
-
 $content-bg:			#ebf1f5;
 $content-border-color:	darken($content-bg, 10%);
 
