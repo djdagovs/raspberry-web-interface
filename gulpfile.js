@@ -9,13 +9,13 @@ var gulp = require('gulp'),
     concat = require('gulp-concat');
 
 var stylesheets = [
-    'web/bower_components/animate.css/animate.min.css',
+    './bower_components/animate.css/animate.min.css',
     'web/assets/css/**/*.css'
 ];
 
 var fonts = [
-    'web/bower_components/bootstrap-sass/assets/fonts/bootstrap/*',
-    'web/bower_components/font-awesome/fonts/*'
+    './bower_components/bootstrap-sass/assets/fonts/**/*',
+    './bower_components/font-awesome/fonts/*'
 ];
 
 var scripts = {
@@ -23,9 +23,9 @@ var scripts = {
         'web/assets/js/**/*.js',
     ],
     vendor: [
-        'web/bower_components/jquery/dist/jquery.min.js',
-        'web/bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
-        'web/bower_components/jasny-bootstrap/js/offcanvas.js'
+        './bower_components/jquery/dist/jquery.min.js',
+        './bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
+        './bower_components/jasny-bootstrap/js/offcanvas.js'
     ],
 };
 
