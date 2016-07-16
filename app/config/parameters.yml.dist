@@ -18,6 +18,10 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
+    # App settings
     app_preferred_network_interface: wlan0
     app_wpa_supplicant_config_file: /etc/wpa_supplicant/wpa.conf
     app_command_executor_pretend: false
+
+    # WiFi Scanner settings
+    app_wireless_scanner_max_tries: 3

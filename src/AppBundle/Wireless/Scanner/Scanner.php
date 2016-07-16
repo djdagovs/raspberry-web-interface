@@ -24,11 +24,17 @@ class Scanner
     */
     private $commandExecutor;
 
-    public function __construct(NetworkInterface $interface, LoggerInterface $logger, Executor $commandExecutor)
+    /**
+     * @var int
+     */
+    private $maxTries;
+
+    public function __construct(NetworkInterface $interface, LoggerInterface $logger, Executor $commandExecutor, $maxTries = 3)
     {
         $this->interface = $interface;
         $this->logger = $logger;
         $this->commandExecutor = $commandExecutor;
+        $this->maxTries = $maxTries;
     }
 
     /**
@@ -62,10 +68,32 @@ class Scanner
     public function getResults()
     {
         if ($this->scan()) {
-            sleep(3);
+            sleep(2);
         }
 
-        $command = $this->commandExecutor->execute('wpa_cli -i '.$this->interface->getName().' scan_results');
+        // Check if there are any results
+        for ($i = 1; $i <= $this->maxTries; $i++) {
+            // Wait before retrieving results
+            sleep(1);
+
+            $this->logger->info(sprintf('Getting wireless scan results... Attempt %d of %d.', $i , $this->maxTries));
+
+            $command = $this->commandExecutor->execute('wpa_cli -i '.$this->interface->getName().' scan_results');
+
+            if ($command->isValid()) {
+                // Offset 1 removes the comment lines
+                $count = $command->getOutputCount(1);
+
+                // If more than one network is found during an iteration, continue.
+                if ($count > 1) {
+                    $this->logger->info(sprintf('Found %d networks, continuing.', $count));
+                    continue;
+                } else {
+                    $this->logger->info(sprintf('Found %d networks, trying again...', $count));
+                }
+            }
+        }
+
         $results = array();
 
         if ($command->isValid()) {

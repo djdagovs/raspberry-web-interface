@@ -13,7 +13,7 @@ services:
 
     app.wireless.scanner:
         class: AppBundle\Wireless\Scanner\Scanner
-        arguments: ['@app.network.preferred_interface', '@logger', '@app.command.executor']
+        arguments: ['@app.network.preferred_interface', '@logger', '@app.command.executor', '%app_wireless_scanner_max_tries%']
 
     app.wireless.network_manager:
         class: AppBundle\Wireless\NetworkManager
