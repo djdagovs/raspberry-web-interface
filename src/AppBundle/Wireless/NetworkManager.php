@@ -147,6 +147,11 @@ class NetworkManager
     {
         $command = $this->commandExecutor->execute(sprintf('wpa_cli enable_network %d', $id));
 
+        // Save configuration
+        if ($command->isValid()) {
+            $this->commandExecutor->execute('wpa_cli save_config');
+        }
+
         return $command->isValid();
     }
 
@@ -160,6 +165,11 @@ class NetworkManager
     {
         $command = $this->commandExecutor->execute(sprintf('wpa_cli disable_network %d', $id));
 
+        // Save configuration
+        if ($command->isValid()) {
+            $this->commandExecutor->execute('wpa_cli save_config');
+        }
+
         return $command->isValid();
     }
 
@@ -172,6 +182,11 @@ class NetworkManager
     public function removeNetwork($id)
     {
         $command = $this->commandExecutor->execute(sprintf('wpa_cli remove_network %d', $id));
+
+        // Save configuration
+        if ($command->isValid()) {
+            $this->commandExecutor->execute('wpa_cli save_config');
+        }
 
         return $command->isValid();
     }
