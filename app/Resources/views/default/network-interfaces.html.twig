@@ -15,7 +15,7 @@
                             {% if interface.operation_state and interface.operation_state.0 == 'Not running' %}
                                 <form action="{{ url('network_interfaces_enable') }}" method="post">
                                     <input type="hidden" name="name" value="{{ interface.name }}">
-                                    <button type="submit" class="btn btn-success btn-xs">Enable</button>
+                                    <button type="submit" class="btn btn-success btn-sm">Enable</button>
                                 </form>
                             {% else %}
                                 <form action="{{ url('network_interfaces_disable') }}" method="post">
